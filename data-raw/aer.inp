@@ -3,7 +3,6 @@
 **
 ** AERMOD Input Produced by:
 ** AERMOD View Ver. 9.1.0
-** Lakes Environmental Software Inc.
 ** Date: 10/7/2016
 ** File: C:\Users\dkvale\Desktop\aer.inp
 **
@@ -16,7 +15,7 @@
 **
 **
 CO STARTING
-   TITLEONE 1294-31: Calpine-Mankato NO2-PVMRM AERMOD Modeling
+   TITLEONE 1294-31
    TITLETWO SIL Run; 2006-2010 RWF-MPX, Variable O3
    MODELOPT CONC
    AVERTIME 1 ANNUAL
