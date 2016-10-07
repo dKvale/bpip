@@ -1,0 +1,94 @@
+ bpip                                                                          
+
+                              BPIP (Dated: 04274)
+ DATE : 10/ 7/2016
+ TIME : 13:16:32
+ bpip                                                                          
+
+ ============================
+ BPIP PROCESSING INFORMATION:
+ ============================
+
+   The p  flag has been set for preparing downwash related data
+          for a model run utilizing the PRIME algorithm.
+
+   Inputs entered in METERS     will be converted to meters using 
+    a conversion factor of    1.0000.  Output will be in meters.
+
+   UTMP is set to UTMN.  The input is assumed to be in a local
+    X-Y coordinate system as opposed to a UTM coordinate system.
+    True North is in the positive Y direction.
+
+   Plant north is set to   0.00 degrees with respect to True North.  
+
+
+ bpip                                                                          
+
+
+
+                PRELIMINARY* GEP STACK HEIGHT RESULTS TABLE
+                         (Output Units: meters)
+
+                            Stack-Building            Preliminary*
+         Stack    Stack     Base Elevation    GEP**   GEP Stack
+         Name     Height    Differences       EQN1    Height Value
+
+
+        Stack_1    10.00         0.00        25.00        65.00
+
+   * Results are based on Determinants 1 & 2 on pages 1 & 2 of the GEP
+     Technical Support Document.  Determinant 3 may be investigated for
+     additional stack height credit.  Final values result after
+     Determinant 3 has been taken into consideration.
+  ** Results were derived from Equation 1 on page 6 of GEP Technical
+     Support Document.  Values have been adjusted for any stack-building
+     base elevation differences.
+
+     Note:  Criteria for determining stack heights for modeling emission
+     limitations for a source can be found in Table 3.1 of the
+     GEP Technical Support Document.
+
+
+
+
+
+                              BPIP (Dated: 04274)
+ DATE : 10/ 7/2016
+ TIME : 13:16:32
+
+
+ bpip                                                                          
+
+  BPIP output is in meters
+
+
+     SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00   10.00
+     SO BUILDHGT Stack_1    10.00   10.00   10.00   10.00   10.00   10.00
+     SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00   10.00
+     SO BUILDHGT Stack_1    10.00   10.00   10.00   10.00   10.00   10.00
+     SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00   11.16
+     SO BUILDWID Stack_1    11.11   10.72   10.00   10.72   11.11   11.16
+     SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00   11.16
+     SO BUILDWID Stack_1    11.11   10.72   10.00   10.72   11.11   11.16
+     SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    9.33
+     SO BUILDLEN Stack_1     8.12    6.66    5.00    6.66    8.12    9.33
+     SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    9.33
+     SO BUILDLEN Stack_1     8.12    6.66    5.00    6.66    8.12    9.33
+     SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00  -21.99
+     SO XBADJ    Stack_1   -22.85  -23.03  -22.50  -23.03  -22.85  -21.99
+     SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00   12.66
+     SO XBADJ    Stack_1    14.73   16.37   17.50   16.37   14.73   12.66
+     SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00   10.00
+     SO YBADJ    Stack_1     6.84    3.47    0.00   -3.47   -6.84  -10.00
+     SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+     SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00  -10.00
+     SO YBADJ    Stack_1    -6.84   -3.47    0.00    3.47    6.84   10.00
+     SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00

@@ -12,7 +12,7 @@
 
 #setwd("..\\batch run")
 
-read_aer_out <- function(file = "aermod.out") {
+read_bpip_out <- function(file = "aermod.out") {
   
   out <- readLines(file)
 

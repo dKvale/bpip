@@ -1,6 +1,6 @@
 ---
 title: ""
-author: "MPCA - Risk evaluation and air modeling, EAO"
+author: "MPCA - Risk evaluation and air modeling, EAO division"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,6 +9,22 @@ vignette: >
 ---
 
 
-# Objective
+## Objective
 
+Create downwash inputs for a 10x10x10 building rotated 45 degrees and located 20 meters to the West of a facility.
+
+
+
+## Install BPIP to the working directory
+```{r }
+install_bpip()
+
+```
+
+
+## Add new building
+```{r }
+add_building()
+
+```
 

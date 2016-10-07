@@ -10,7 +10,7 @@
 #
 
 
-read_aermod_inp <- function(file = "aermod.inp") {
+read_bpip_inp <- function(file = "aermod.inp") {
   
   inp <- readLines(file)
   

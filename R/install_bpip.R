@@ -1,9 +1,9 @@
-getAERMOD <- function() {
+install_bpip <- function() {
  
-  tf <- tempfile("aermod", fileext = ".zip")
+  tf <- tempfile("bpip", fileext = ".zip")
   
-  download.file("http://www.epa.gov/ttn/scram/models/aermod/aermod_exe.zip", tf)
+  download.file("https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip", tf)
   
-  unzip(tf)
+  unzip(tf, exdir="bpip")
   
 }

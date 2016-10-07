@@ -1,48 +1,46 @@
 #' Add building
 #'
 #' Create building parameters for BPIP.
-#' @param BUILDING Building names. Separate multiple sources with commas.
+#' @param building Building names. Separate multiple sources with commas.
 #' @keywords building bpip input coords
 #' @export
 #' @examples
-#' add_building(BUILDING = "Bld_1")
+#' add_building(building = "Bld_1")
 # 
 # 
 
-add_building <- function(BUILDING       = "Bld_1",
-                         SOURCE_COORDS  = c(0, 0),
-                         DISTANCE       = 20,
-                         ANGLE_DEGREES  = 10,
-                         ELEV           = 1,
-                         HEIGHT         = 10,
-                         LENGTH         = 5,
-                         WIDTH          = 10
+add_building <- function(data_table          = NULL,
+                         building            = "Bld_1",
+                         source_coords       = c(0, 0),
+                         dist_from_source    = 20,
+                         angle_from_source   = 0,
+                         elev                = 0,
+                         height              = 10,
+                         length              = 5,
+                         width               = 10,
+                         bld_rotation        = 0,
+                         angle_units         = "degrees"
 ) {
   
-  ANGLE_RADS <- ANGLE_DEGREES * pi/180
+  if(angle_units == "degrees") {
+    angle_from_source <- angle_from_source * pi/180
+    bld_rotation <- bld_rotation * pi/180
+  }
   
-  bld_center_x <- SOURCE_COORDS[1] - round(DISTANCE * cos(ANGLE_RADS), 2)
+  bld_center_x <- source_coords[1] - round(distance * cos(angle_from_source), 2)
   
-  bld_center_y <- SOURCE_COORDS[2] + round(DISTANCE * sin(ANGLE_RADS), 2)
+  bld_center_y <- source_coords[2] + round(distance * sin(angle_from_source), 2)
   
-  bld_coords <- rectangle(center_x = bld_center_x,
-                          center_y = bld_center_y,
-                          length = LENGTH,
-                          width  = WIDTH)
+  bld_corners <- bld_coords(source_coords       = source_coords,
+                            distance            = distance,
+                            angle_from_source   = angle_from_source,
+                            length              = length,
+                            width               = width,
+                            bld_rotation        = bld_rotation,
+                            angle_units         = "radians")
   
-  plot(c(SOURCE_COORDS[1], bld_coords$XCOORDS),
-       c(SOURCE_COORDS[2], bld_coords$YCOORDS),
-       col  = c("red", rep("blue", 4)),
-       pch  = 16,
-       xlab = paste("length =", LENGTH),
-       ylab = paste("width =", WIDTH),
-       xlim = c(SOURCE_COORDS[1] - DISTANCE - WIDTH, 
-                SOURCE_COORDS[1] + DISTANCE + WIDTH),
-       ylim = c(SOURCE_COORDS[1] - DISTANCE - LENGTH,
-                SOURCE_COORDS[1] + DISTANCE + LENGTH))
+  return(bld_corners)
   
-  
-  return(bld_coords)
   
 }
 

@@ -9,12 +9,12 @@
 # 
 # 
 
-downwash_tbl <- function(STACK = "STK_1",
+downwash_tbl <- function(STACK     = "STK_1",
                          BUILDHGTS = "",
                          BUILDWIDS = "",
                          BUILDLENS = "",
-                         XBADJ = "",
-                         YBADJ = ""
+                         XBADJ     = "",
+                         YBADJ     = ""
 ) {
 
 df <- data.frame(STACK     = STACK,

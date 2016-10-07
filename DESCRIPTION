@@ -1,9 +1,9 @@
 Package: bpip
 Type: Package
-Title: Interface for EPA's air dispersion downwash model BPIP
+Title: Interface for EPA's air dispersion downwash model - BPIP
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Dorian", "Kvale", email = "dorian.kvale@state.mn.us", role = c("aut", "cre"))
+Description: This package provides a dataframe interface for the EPA air dispersion downwash model BPIP.
 Depends: R (>= 3.2.4)
 License: What license is it under?
 Encoding: UTF-8
