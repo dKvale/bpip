@@ -1,148 +1,137 @@
-#' Read AERMOD input file
+#' Read BPIP input file
 #'
 #' Read an aermod.inp file into an AERMOD input table.
-#' @param file File location. Default is "aermod.inp" in the working directory.
-#' @keywords read aermod input
+#' @param path File location. Default is "bpip.inp" in the working directory.
+#' @keywords read bpip input
 #' @export
 #' @examples
-#' read_aermod_inp(file = "aermod.inp")
+#' read_bpip_inp(file = "bpip.inp")
 # 
 #
 
-
-read_bpip_inp <- function(file = "aermod.inp") {
+read_bpip_inp <- function(file = "bpip.inp") {
   
   inp <- readLines(file)
   
-  # CONTROL OPTIONS
-  start <- grep("CO STARTING", inp) + 1
-  end   <- grep("CO FINISHED", inp) - 1 
+  # Search for the last line not containing a single or double quote 
+  sources_start <- max((1:length(inp))[!grepl("[']", inp) & !grepl('["]', inp)], na.rm=T)
   
-  df <- read.fwf(textConnection(inp[start:end]), 
-                 widths = c(12, nchar(inp[start]) - 12), 
-                 header = FALSE, 
-                 stringsAsFactors = FALSE)
+  #output_type   <- inp[2] 
   
-  co <- control_tbl()
+  buildings   <- c()
+  n_tiers     <- c()
+  heights     <- c()
+  widths      <- c()
+  lengths     <- c()
+  elevs       <- c()
+  xcoords     <- c()
+  ycoords     <- c()
+  bld_xcoords <- list()[0]
+  bld_ycoords <- list()[0]
+  skip        <- FALSE
   
-  co$TITLEONE <- df[1, 2]
-  co$TITLETWO <- df[2, 2]
-  co$MODELOPT <- df[3, 2]
-  co$AVERTIME <- df[4, 2]
-  co$POLLUTID <- df[5, 2]
+  for(i in 6:(sources_start - 1)) {
+    
+    if(!skip) {
+    
+      line  <- strsplit(paste0(" ", inp[i]), "\\s+")[[1]]
+  
+      # Check if line contains building name
+      if(grepl("[']", line[2]) | grepl('["]', line[2])) {
+          
+          if(length(xcoords) > 1) {
+            lengths <- c(lengths, signif(max(xcoords) - min(xcoords), 2))
+            widths  <- c(widths, signif(max(ycoords) - min(ycoords), 2))
+            bld_xcoords[length(bld_xcoords)+1] <- list(xcoords)
+            bld_ycoords[length(bld_ycoords)+1] <- list(ycoords)
+            xcoords <- c()
+            ycoords <- c()
+          }
+            
+          buildings <- c(buildings, first)
+          n_tiers   <- c(n_tiers, line[3])
+          elevs     <- c(elevs, line[4])
+          
+          heights <- c(heights, strsplit(paste0(" ", inp[i+1]), "\\s+")[[1]][3]) 
       
-  # SOURCE OPTIONS
-  so <- source_tbl()
+          skip <- TRUE
+      } else {
+         xcoords <- c(xcoords, as.numeric(line[2]))
+         ycoords <- c(ycoords, as.numeric(strsplit(paste0(" ", inp[i]), "\\s+")[[1]][3]) )
+      }
+    
+    } else skip <- FALSE
+  }
   
-  # SOURCE locations
-  start <- grep("LOCATION", inp)[1]
-  end   <- max(grep("LOCATION", inp))
+  if(length(xcoords) > 1) {
+    bld_xcoords[length(bld_xcoords)+1] <- list(xcoords)
+    bld_ycoords[length(bld_ycoords)+1] <- list(ycoords)
+    xcoords <- c()
+    ycoords <- c()
+  }
   
-  df <- gsub("[[:space:]]+", ",", inp[start:end][!grepl("DESCRSRC", inp[start:end])])
+  sources      <- c()
+  src_elevs    <- c()
+  src_heights  <- c()
+  src_coords   <- list()[0] 
   
-  df <- read.csv(textConnection(df), header = FALSE, stringsAsFactors = FALSE)
-
-  so$ID       <- df[ , 3]
-  so$TYPE     <- df[ , 4]
-  so$XCOORD   <- df[ , 5]
-  so$YCOORD   <- df[ , 6]
-  so$ELEV     <- df[ , 7]
+  for(i in (sources_start + 1):length(inp)) {
+    
+    line          <- strsplit(paste0(" ", inp[i]), "\\s+")[[1]]
+    
+    if(length(line) > 1) {
+    
+      sources     <-  c(sources, line[[2]])
+      src_elevs   <-  c(src_elevs, line[[3]])
+      src_heights <-  c(src_heights, line[[4]])
+      src_coords[length(src_coords) + 1]  <-  list(as.numeric(c(line[[5]]), line[[6]]))
+    } 
+  } 
   
-  so$DESCRSRC <- ""
+  distances  <- c()
+  angles     <- c()
   
-  # SOURCE parameters
-  start <- grep("SRCPARAM", inp)[1]
-  end   <- max(grep("SRCPARAM", inp))
+  for(i in 1:length(buildings)) {
+    
+    bld_center <- c(mean(bld_xcoords[[i]]), mean(bld_ycoords[[i]]))
+    
+    distances <- c(distances, dist(cbind(src_coords[[1]], bld_center))[[1]])
+    
+    # Normalize coordinates
+    a <- c(0, 1)
+    b <- c(bld_center[1] - as.numeric(src_coords[[1]][1]), bld_center[2] - as.numeric(src_coords[[1]][2]))
+    
+    # Calculate angle between building and North
+    theta <- acos( sum(a*b) / ( sqrt(sum(a * a)) * sqrt(sum(b * b)) ) )
+    
+    ang_degrees <- (theta * 180/pi ) %% 360
+    
+    if(b[1] < 1) ang_degrees <- -ang_degrees
+    
+    angles    <- c(angles, ang_degrees)
+  }
   
-  df <- gsub("[[:space:]]+", ",", inp[start:end])
   
-  df <- read.csv(textConnection(df), header = FALSE, stringsAsFactors = FALSE)
-  
-  so$EMISS    <- df[ , 4]
-  so$HEIGHT   <- df[ , 5]
-  so$TEMPK    <- df[ , 6]
-  so$VELOCITY <- df[ , 7]
-  so$DIAMETER <- df[ , 8]
-  
-  # SOURCE downwash
-  so$DOWNFILE <- ""
-  
-  # SOURCE groups
-  start <- grep("SRCGROUP", inp)[1]
-  end   <- max(grep("SRCGROUP", inp))
-  
-  df <- read.fwf(textConnection(inp[start:end]), 
-                 widths = c(12, 8, nchar(inp[start])-20), 
-                 header = FALSE, 
-                 stringsAsFactors = FALSE)
-  
-  so$GROUPID  <- df[ , 2]
-  so$GROUPSRC <- df[ , 3]
+  # Create data frame
+  inp <- tibble(PRJ_TITLE         = inp[1],
+                BUILDING          = buildings,
+                HEIGHT            = heights,
+                LENGTH            = lengths,
+                WIDTH             = widths,
+                BLD_ROTATION      = NA,
+                ANGLE_UNITS       = "degrees",
+                ELEV              = elevs,
+                N_TIERS           = n_tiers,
+                BLD_XCOORDS       = bld_xcoords,
+                BLD_YCOORDS       = bld_ycoords,
+                DIST_FROM_SOURCE  = distances,
+                ANGLE_FROM_SOURCE = angles,
+                SOURCE_NAME       = sources,
+                SOURCE_COORDS     = src_coords,
+                SOURCE_ELEV       = src_elevs,
+                SOURCE_HEIGHT     = src_heights
+                )
       
-  # RECEPTORS
-  start <- grep("RE STARTING", inp)[1] + 1
-  end   <- max(grep("RE FINISHED", inp)) - 1
-  
-  re <- receptor_tbl()
-  
-  re$RECTFILE <- strsplit(inp[start:end][grep("INCLUDED", inp[start:end])], "INCLUDED ")[[1]][2]
-      
-  # METEOROLOGY
-  start <- grep("ME STARTING", inp) + 1
-  end   <- grep("ME FINISHED", inp) - 1 
-  
-  df <- read.fwf(textConnection(inp[start:end]), 
-                 widths = c(12, max(nchar(inp[start:end])) - 12), 
-                 header = FALSE, 
-                 stringsAsFactors = FALSE)
-  
-  me <- new("MeteorologyOptions")
-  
-  me$SURFFILE <- df[1, 2]
-  me$PROFFILE <- df[2, 2]
-  me$SURFDATA <- df[3, 2]
-  me$UAIRDATA <- df[4, 2]
-  me$PROFBASE <- df[5, 2]
-  me$STARTEND <- df[6, 2]
-      
-  # OUTPUT
-  start <- grep("OU STARTING", inp) + 1
-  end   <- grep("OU FINISHED", inp) - 1
-  
-  df <- read.fwf(textConnection(inp[start:end][!grepl("[**]", inp[start:end])]), 
-                 widths = c(12, max(nchar(inp[start:end])) - 12), 
-                 header = FALSE, 
-                 stringsAsFactors = FALSE)
-  
-  ou <- out_tbl()
-  
-  ou$RECTABLE <- subset(df, V1 == "   RECTABLE ")[ , 2]
-  ou$MAXTABLE <- subset(df, V1 == "   MAXTABLE ")[ , 2]
-  ou$DAYTABLE <- subset(df, V1 == "   DAYTABLE ")[ , 2]
-  ou$PLOTFILE <- subset(df, V1 == "   PLOTFILE ")[ , 2]
-      
-  # PROJECT
-  start <- grep("PROJCTN", inp)
-  end   <- grep("ZONEINX", inp)
-  
-  df <- read.fwf(textConnection(inp[start:end]), 
-                 widths = c(12, max(nchar(inp[start:end])) - 12), 
-                 header = FALSE, 
-                 stringsAsFactors = FALSE)
-  
-  po <- project_tbl
-  
-  po$PROJCTN  <- df[1, 2]
-  po$DESCPTN  <- df[2, 2]
-  po$DATUM    <- df[3, 2]
-  po$DTMRGN   <- df[4, 2]
-  po$UNITS    <- df[5, 2]
-  po$ZONE     <- df[6, 2]
-  po$ZONEINX  <- df[7, 2]
-      
-  # COMBINE all inputs
-  aermod_inp <- cbind(co, so, re, me, ou, po)
-      
-  return(aermod_inp)
+  return(inp)
   
 }

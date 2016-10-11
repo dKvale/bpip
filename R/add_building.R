@@ -1,4 +1,4 @@
-#' Add building
+#' Add building  (deprecated, suggest using rbind)
 #'
 #' Create building parameters for BPIP.
 #' @param building Building names. Separate multiple sources with commas.

@@ -20,12 +20,12 @@ rectangle <- function(center_x = 0,
 ){
   
   if(angle_units == "degrees") {
-    rotation <- -rotation * pi/180
+    rotation <- -(rotation-450) * pi/180
   }
   
   corner_distance <- sqrt((width/2)**2 + (length/2)**2)
   
-  # Trigonometry for the win!
+  # Trigonometry is real
   corner_angle <- asin((length/2)/corner_distance)
   
   rotated_angle1 <- rotation + corner_angle + pi/2

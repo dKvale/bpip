@@ -20,11 +20,11 @@ bld_coords <- function(source_coords       = c(0, 0),
 ) {
   
   if(angle_units == "degrees") {
-    angle_from_source <- angle_from_source * pi/180
-    bld_rotation <- bld_rotation * pi/180
+    angle_from_source <- -(angle_from_source - 450) * pi/180
+    bld_rotation      <- -(bld_rotation - 450) * pi/180
   }
   
-  bld_center_x <- source_coords[1] - round(dist_from_source * cos(angle_from_source), 2)
+  bld_center_x <- source_coords[1] + round(dist_from_source * cos(angle_from_source), 2)
   
   bld_center_y <- source_coords[2] + round(dist_from_source * sin(angle_from_source), 2)
   

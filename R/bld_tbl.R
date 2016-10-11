@@ -2,6 +2,7 @@
 #'
 #' Create an input table of BPIP building options.
 #' @param building Building names. Separate multiple sources with commas.
+#' @param dist_from_source Distance from center of source to the center of the building. 
 #' @keywords building bpip input coords
 #' @export
 #' @examples
@@ -9,7 +10,8 @@
 # 
 # 
 
-bld_tbl <- function(building            = "Bld_1",
+bld_tbl <- function(prj_title           = "BPIP input",
+                    building            = "Bld_1",
                     height              = 10,
                     length              = 5,
                     width               = 10,
@@ -27,7 +29,8 @@ bld_tbl <- function(building            = "Bld_1",
                     source_height       = 10
                     ) {
 
-df <- tibble(BUILDING          = building,
+df <- tibble(PRJ_TITLE         = prj_title,
+             BUILDING          = building,
              HEIGHT            = height,
              LENGTH            = length,
              WIDTH             = width,

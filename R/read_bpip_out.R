@@ -1,25 +1,22 @@
-#' Read AERMOD output file
+#' Read BPIP output file
 #'
-#' Read an aermod.out file into an AERMOD results table.
-#' @param file File location. Default is "aermod.out" in the working directory.
-#' @keywords read aermod output results
+#' Read an bpip.out file into a dataframe.
+#' @param path File location. Default is "bpip.out" in the working directory.
+#' @keywords read bpip output results
 #' @export
 #' @examples
-#' read_aer_out(file = "aermod.ouy")
+#' read_bpip_out(file = "bpip.out")
 # 
 #
 
 
-#setwd("..\\batch run")
-
-read_bpip_out <- function(file = "aermod.out") {
+read_bpip_out <- function(file = "bpip.out") {
   
   out <- readLines(file)
 
-  # Read dispersion tables
-  results_all <- data.frame()
+  # Title
+  title <- out
   
-  options(digits= 10)
   
   for(line in grep("GROUP:", out)) {
     
