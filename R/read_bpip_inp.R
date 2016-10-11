@@ -16,7 +16,6 @@ read_bpip_inp <- function(file = "bpip.inp") {
   # Search for the last line not containing a single or double quote 
   sources_start <- max((1:length(inp))[!grepl("[']", inp) & !grepl('["]', inp)], na.rm=T)
   
-  #output_type   <- inp[2] 
   
   buildings   <- c()
   n_tiers     <- c()
@@ -48,7 +47,7 @@ read_bpip_inp <- function(file = "bpip.inp") {
             ycoords <- c()
           }
             
-          buildings <- c(buildings, first)
+          buildings <- c(buildings, line[2])
           n_tiers   <- c(n_tiers, line[3])
           elevs     <- c(elevs, line[4])
           
@@ -64,6 +63,8 @@ read_bpip_inp <- function(file = "bpip.inp") {
   }
   
   if(length(xcoords) > 1) {
+    lengths <- c(lengths, signif(max(xcoords) - min(xcoords), 2))
+    widths  <- c(widths, signif(max(ycoords) - min(ycoords), 2))
     bld_xcoords[length(bld_xcoords)+1] <- list(xcoords)
     bld_ycoords[length(bld_ycoords)+1] <- list(ycoords)
     xcoords <- c()

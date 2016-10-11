@@ -10,54 +10,42 @@
 #
 
 
-read_bpip_out <- function(file = "bpip.out") {
+read_bpip_out <- function(file = "data-raw/bpip.out") {
   
   out <- readLines(file)
+  
+  sources       <- c()
+  bld_heights   <- c()
+  bld_widths    <- c()
+  bld_lengths   <- c()
+  xbadjs        <- c()
+  ybadjs        <- c()
 
-  # Title
-  title <- out
   
+  # Search for the start of BPIP output
+  so_start <- min(grep("BUILDHGT", out), na.rm=T)
   
-  for(line in grep("GROUP:", out)) {
+  for(i in so_start:length(out)) {
+    line          <- out[i]
+    sources       <- c(sources, strsplit(out[i], "\\s+")[[1]][4])
+    bld_heights   <- c(bld_heights, gsub("\\s+|SO|BUILDHGT|", "", out[[i]))
+    bld_widths    <- c(bld_widths, )
+    bld_lengths   <- c(bld_lengths, )
+    xbadjs        <- c(xbadjs, )
+    ybadjs        <- c(ybadjs, )
     
-    start <- line + grep("X-COORD", out[line:length(out)])[1] + 1
-    
-    end   <- start + grep("[***]", out[start:length(out)])[1] - 2
-    
-    df <- gsub("[[:space:]]+", ",", out[start:end])
-    
-    df <- read.csv(textConnection(df), header = FALSE, stringsAsFactors = FALSE)
-    
-    df <- df[ , -c(1, ncol(df))]
-    
-    n_col <- ncol(df)
-    
-    names(df) <- rep('x', n_col)
-    
-    df <- rbind(df[ , 1:(n_col/2)], df[ , (n_col/2+1):n_col])
-    
-    if(ncol(df) < 4) df$date <- NA
-    
-    names(df) <- c('x','y','concentration','date')
-  
-    df$type    <- strsplit(strsplit(out[line], "THE[[:space:]]+")[[1]][2], "[[:space:]]+VALUES")[[1]][1]
-    
-    df$group   <- strsplit(strsplit(out[line], "GROUP:[[:space:]]+")[[1]][2], "[[:space:]]+[***]")[[1]][1]
-    
-    df$sources <- strsplit(out[line+1], ":[[:space:]]+")[[1]][2]
-    
-    results_all <- rbind(results_all, df)
-  
   }
   
-  # Get AERMOD version
-  cat(paste0("AERMOD version #", substring(out[grep("VERSION", out)][1], 25, 29), "\n\n"))
+  # Create dataframe
+  out <- tibble(PRJ_TITLE         = strsplit(out[1], "\\s+")[[1]][2],
+                BUILDHGT          = bld_heights,
+                BUILDWID          = bld_widths,
+                BUILDLEN          = bld_lengths,       
+                XBADJ             = xbadjs,
+                YBADJ             = ybadjs,
+                DEGREES           = degrees
+  )
   
-  # Read source names
-  cat(paste0("Source list: ", paste0(substring(out[grep("LOCATION", out)], 13, 24), collapse = " ")), "\n\n")
+  return(out)
   
-  # Read AERMOD messages
-  cat(paste0(out[(grep("Summary of Total", out)[2]) : (grep("FATAL ERROR", out)[2] - 3)], collapse = "\n"), "\n")
-  
-  return(results_all)
 }
