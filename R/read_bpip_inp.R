@@ -13,10 +13,6 @@ read_bpip_inp <- function(file = "bpip.inp") {
   
   inp <- readLines(file)
   
-  # Search for the last line not containing a single or double quote 
-  sources_start <- max((1:length(inp))[!grepl("[']", inp) & !grepl('["]', inp)], na.rm=T)
-  
-  
   buildings   <- c()
   n_tiers     <- c()
   heights     <- c()
@@ -28,6 +24,10 @@ read_bpip_inp <- function(file = "bpip.inp") {
   bld_xcoords <- list()[0]
   bld_ycoords <- list()[0]
   skip        <- FALSE
+  
+  # Search for the last line not containing a single or double quote 
+  sources_start <- max((1:length(inp))[!grepl("[']", inp) & !grepl('["]', inp)], na.rm=T)
+  
   
   for(i in 6:(sources_start - 1)) {
     
@@ -78,7 +78,7 @@ read_bpip_inp <- function(file = "bpip.inp") {
   
   for(i in (sources_start + 1):length(inp)) {
     
-    line          <- strsplit(paste0(" ", inp[i]), "\\s+")[[1]]
+    line       <- strsplit(paste0(" ", inp[i]), "\\s+")[[1]]
     
     if(length(line) > 1) {
     

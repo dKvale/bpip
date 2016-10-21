@@ -6,16 +6,15 @@
 #' @param prj_title Title of project added to BPIP file. Defaults to path name.
 #' @param output_type A character flag controls the BPIP model's output type. For input to either an ISCST2 or an ISCLT2 input file. 
 #'                    The three flags are:
-#'                                        'p'  - Output will be for PRIME or AERMOD input. 
-#'                                        'ST' - Output will be for ISCST2 input.
-#'                                        'LT' - Output will be for ISCLT2 input.
+#'                        'p'  - Output for PRIME or AERMOD input. 
+#'                        'ST' - Output for ISCST2 input.
+#'                        'LT' - Output for ISCLT2 input.
 #' @keywords building bpip write save input
 #' @export
 #' @examples
 #' write_bpip(x = facility_blds)
 # 
 # 
-
 
 write_bpip <- function(x, 
                        path        = "bpip.inp",
@@ -84,12 +83,10 @@ write_bpip <- function(x,
                                 x[1, "SOURCE_HEIGHT"], " ",
                                 paste(unlist(x[1, ]$SOURCE_COORDS), collapse=" "))
   
-  #cat(inp)
   
   if(is.null(path) | nchar(path) < 1) {
     return(inp)
   } else  writeLines(inp, path)
-  
     
 }
 

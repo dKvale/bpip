@@ -1,29 +1,32 @@
 #' Downwash options
 #'
-#' Create an input table of AERMOD downwash options.
-#' @param STACK Stack names. Separate multiple sources with commas.
+#' Create an input table of downwash options for AERMOD.
+#' @param STACK Stack names.
 #' @keywords downwash building aermod input
 #' @export
 #' @examples
-#' downwash_tbl(STACK = "STK_1")
+#' downwash_tbl(stack = "STK_1")
 # 
 # 
 
-downwash_tbl <- function(STACK     = "STK_1",
-                         BUILDHGTS = "",
-                         BUILDWIDS = "",
-                         BUILDLENS = "",
-                         XBADJ     = "",
-                         YBADJ     = ""
+downwash_tbl <- function(stack     = "STK_1",
+                         angle     = seq(10,360,10),
+                         buildhgts = 10,
+                         buildwids = 10,
+                         buildlens = 10,
+                         xbadj     = 1,
+                         ybadj     = 1
 ) {
 
-df <- data.frame(STACK     = STACK,
-                 BUILDHGTS = BUILDHGTS,
-                 BUILDWIDS = BUILDWIDS,
-                 BUILDLENS = BUILDLENS,
-                 XBADJ     = XBADJ,
-                 YBADJ     = YBADJ,
-                 stringsAsFactors = F)
+df <- tibble(STACK     = stack,
+             ANGLE     = angle,
+             BUILDHGTS = buildhgts,
+             BUILDWIDS = buildwids,
+             BUILDLENS = buildlens,
+             XBADJ     = xbadj,
+             YBADJ     = ybadj,
+             stringsAsFactors = F)
+
 return(df)
 }
 

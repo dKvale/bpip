@@ -1,4 +1,4 @@
-#' Plot a BPIP building dataframe.
+#' Plot buildings from a BPIP dataframe.
 #'
 #' Plot a BPIP building dataframe.
 #' @param path File location. Default is "bpip.inp" in the working directory.
@@ -58,10 +58,6 @@ plot_bpip <- function(data = bpip) {
        xlim = c(source_coords[1] - bld_range, source_coords[1] + bld_range),
        ylim = c(source_coords[2] - bld_range, source_coords[2] + bld_range)
        
-       #xlim = c(source_coords[1] - max(abs(source_coords[1] - xcoords), na.rm=T), 
-        #        source_coords[1] + max(abs(source_coords[1] - xcoords), na.rm=T)),
-       #ylim = c(source_coords[2] - max(abs(source_coords[2] - ycoords), na.rm=T),
-      #          source_coords[2] + max(abs(source_coords[2] - ycoords), na.rm=T))
   )
   
   for(i in 1:nrow(data)) {
