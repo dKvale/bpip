@@ -4,17 +4,17 @@
 \alias{downwash_tbl}
 \title{Downwash options}
 \usage{
-downwash_tbl(STACK = "STK_1", BUILDHGTS = "", BUILDWIDS = "",
-  BUILDLENS = "", XBADJ = "", YBADJ = "")
+downwash_tbl(stack = "STK_1", angle = seq(10, 360, 10), buildhgts = 10,
+  buildwids = 10, buildlens = 10, xbadj = 1, ybadj = 1)
 }
 \arguments{
-\item{STACK}{Stack names. Separate multiple sources with commas.}
+\item{stack}{Stack names.}
 }
 \description{
-Create an input table of AERMOD downwash options.
+Create an input table of downwash options for AERMOD.
 }
 \examples{
-downwash_tbl(STACK = "STK_1")
+downwash_tbl(stack = "STK_1")
 }
 \keyword{aermod}
 \keyword{building}

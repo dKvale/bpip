@@ -1,7 +1,7 @@
 #' Downwash options
 #'
 #' Create an input table of downwash options for AERMOD.
-#' @param STACK Stack names.
+#' @param stack Stack names.
 #' @keywords downwash building aermod input
 #' @export
 #' @examples

@@ -1,8 +1,8 @@
 #' Read BPIP output file
 #'
-#' Read an bpip.out file into a dataframe.
+#' Read a bpip.out file into a dataframe.
 #' @param file File location. Default is "bpip.out" in the working directory.
-#' @param as_text Output results as a character string. If FALSE ouput is a data frame.
+#' @param as_text Output results as a character string. If FALSE ouput as a dataframe.
 #' @keywords read bpip output results
 #' @export
 #' @examples

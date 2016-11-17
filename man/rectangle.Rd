@@ -4,7 +4,8 @@
 \alias{rectangle}
 \title{Rectangle coordinates}
 \usage{
-rectangle(center_x = 0, center_y = 0, length = 1, width = 2)
+rectangle(center_x = 0, center_y = 0, length = 3, width = 4,
+  rotation = 0, angle_units = "degrees", show_plot = TRUE)
 }
 \arguments{
 \item{center_x}{Building's center X coordinate.}

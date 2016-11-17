@@ -1,6 +1,6 @@
 #' Read BPIP input file
 #'
-#' Read an aermod.inp file into an AERMOD input table.
+#' Read a bpip.inp file into a dataframe.
 #' @param path File location. Default is "bpip.inp" in the working directory.
 #' @keywords read bpip input
 #' @export

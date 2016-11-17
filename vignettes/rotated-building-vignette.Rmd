@@ -9,10 +9,9 @@ vignette: >
 ---
 
 
-## Objective
+## Mission
 
-Create downwash inputs for a 10x10x10 building rotated 45 degrees and located 20 meters to the West of a facility.
-
+Create downwash inputs for a 10x10x10 building rotated 45 degrees and located 20 meters to the West of an air emissions source.
 
 
 ## Install BPIP to the working directory

@@ -4,17 +4,19 @@
 \alias{add_building}
 \title{Add building}
 \usage{
-add_building(BUILDING = "Bld_1", SOURCE_COORDS = c(0, 0), DISTANCE = 20,
-  ANGLE_DEGREES = 10, ELEV = 1, HEIGHT = 10, LENGTH = 5, WIDTH = 10)
+add_building(data_table = NULL, building = "Bld_1", source_coords = c(0,
+  0), dist_from_source = 20, angle_from_source = 0, elev = 0,
+  height = 10, length = 5, width = 10, bld_rotation = 0,
+  angle_units = "degrees")
 }
 \arguments{
-\item{BUILDING}{Building names. Separate multiple sources with commas.}
+\item{building}{Building names. Separate multiple sources with commas.}
 }
 \description{
 Create building parameters for BPIP.
 }
 \examples{
-add_building(BUILDING = "Bld_1")
+add_building(building = "Bld_1")
 }
 \keyword{bpip}
 \keyword{building}

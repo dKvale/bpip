@@ -1,7 +1,7 @@
-#' Plot buildings from a BPIP dataframe.
+#' Plot buildings from a BPIP dataframe
 #'
 #' Plot a BPIP building dataframe.
-#' @param path File location. Default is "bpip.inp" in the working directory.
+#' @param data Dataframe of bpip parameters.
 #' @keywords plot bpip buildings downwash
 #' @export
 #' @examples
