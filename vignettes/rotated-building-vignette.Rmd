@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "bpip example: rotate a building"
 author: "MPCA - Risk evaluation and air modeling, EAO division"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
