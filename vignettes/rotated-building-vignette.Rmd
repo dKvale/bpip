@@ -8,22 +8,78 @@ vignette: >
   %\VignetteIndexEntry{}
 ---
 
-
 ## Mission
 
 Create downwash inputs for a 10x10x10 building rotated 45 degrees and located 20 meters to the West of an air emissions source.
 
-
 ## Install BPIP to the working directory
 ```{r }
+library(bpip)
 install_bpip()
-
 ```
 
-
-## Add new building
+## Create new bpip table
 ```{r }
-add_building()
+library(knitr)
 
+builds <- bld_tbl()
+
+kable(builds)
 ```
+
+## Adjust building parameters
+```{r }
+builds$BLD_ROTATION      <- 45
+
+builds$LENGTH            <- 10
+
+builds$ANGLE_FROM_SOURCE <- 270 
+
+kable(builds)
+```
+
+## Plot building
+```{r }
+plot_bpip(builds)
+```
+
+
+## Add a building
+```{r }
+builds <- rbind(builds, builds)
+
+builds$BUILDING[2]          <- "Bld_2"
+
+builds$ANGLE_FROM_SOURCE[2] <- 90
+
+builds$BLD_ROTATION[2]      <- 60
+
+builds$HEIGHT[2]            <- 15
+
+kable(builds)
+```
+
+
+## Plot buildings
+```{r }
+plot_bpip(builds)
+```
+
+## Create bpip input file
+```{r }
+write_bpip(builds, "rotated_building.inp")
+```
+
+## Run bpip
+```{r }
+run_bpip("rotated_building.inp", "rotated_results")
+```
+
+## Read results
+```{r }
+results <- read_bpip_out("rotated_results.out", as_text = FALSE)
+
+kable(results)
+```
+
 

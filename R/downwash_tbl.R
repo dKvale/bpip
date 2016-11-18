@@ -18,7 +18,7 @@ downwash_tbl <- function(stack     = "STK_1",
                          ybadj     = 1
 ) {
 
-df <- tibble(STACK     = stack,
+df <- tibble::tibble(STACK     = stack,
              ANGLE     = angle,
              BUILDHGTS = buildhgts,
              BUILDWIDS = buildwids,

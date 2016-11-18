@@ -4,10 +4,11 @@
 \alias{run_bpip}
 \title{Run BPIP}
 \usage{
-run_bpip(data = bpip_inp, output = "bpip_results", exe_folder = getwd())
+run_bpip(input = "bpip.inp", output = "bpip_results",
+  exe_folder = "bpip_exe")
 }
 \arguments{
-\item{data}{Dataframe of bpip parameters.}
+\item{input}{Path to input file.}
 
 \item{output}{Filename for bpip results.}
 
@@ -17,7 +18,9 @@ run_bpip(data = bpip_inp, output = "bpip_results", exe_folder = getwd())
 Call BPIP.exe and run input file
 }
 \examples{
-run_bpip(data = bpip_inp, output = "bpip_results")
+run_bpip(data = "bpip.inp", 
+         output = "bpip_results", 
+         exe_folder = "bpip_exe")
 }
 \keyword{bpip}
 \keyword{building}

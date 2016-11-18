@@ -9,9 +9,9 @@
 # 
 # 
 
-install_bpip <- function(dir = "bpip") {
+install_bpip <- function(dir = "bpip_exe") {
  
-  tf <- tempfile(dir = dir, fileext = ".zip")
+  tf <- tempfile(dir, fileext = ".zip")
   
   download.file("https://www3.epa.gov/ttn/scram/models/relat/bpipprime.zip", tf)
   

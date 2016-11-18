@@ -32,7 +32,7 @@ write_bpip <- function(data,
   
   inp[4] <- paste0("'UTMN' 0.00")           # Coordinate orientation
   
-  inp[5] <- unique(data$BUILDING)              # Number of buildings
+  inp[5] <- length(unique(data$BUILDING))           # Number of buildings
   
   coord_msg <- TRUE                         # Prevent repeat messages
   
@@ -46,8 +46,7 @@ write_bpip <- function(data,
        length(unlist(data[i, "BLD_YCOORDS"], ",")) < 3 ) {
       
       if(coord_msg) {
-        print("Building vertices were calculated for a rectangle. To create 
-               a custom building shape, provide 3 or more x,y coordinates.")
+        print("Building vertices were calculated for a rectangle. To create a custom building shape, provide 3 or more x,y coordinates.")
         
         coord_msg <- FALSE
       }
@@ -83,6 +82,8 @@ write_bpip <- function(data,
                                 data[1, "SOURCE_HEIGHT"], " ",
                                 paste(unlist(data[1, ]$SOURCE_COORDS), collapse=" "))
   
+  cat("\nGenerated input file: \n\n")
+  invisible(writeLines(inp))
   
   if(is.null(path) | nchar(path) < 1) {
     return(inp)

@@ -1,6 +1,6 @@
-#' Building options
+#' Building parameters
 #'
-#' Create an input table of BPIP building options.
+#' Create an input table of building parameters for BPIP.
 #' @param building Building names. Separate multiple sources with commas.
 #' @param dist_from_source Distance from center of source to the center of the building. 
 #' @keywords building bpip input coords
@@ -29,7 +29,7 @@ bld_tbl <- function(prj_title           = "BPIP input",
                     source_height       = 10
                     ) {
 
-df <- tibble(PRJ_TITLE         = prj_title,
+df <- tibble::tibble(PRJ_TITLE         = prj_title,
              BUILDING          = building,
              HEIGHT            = height,
              LENGTH            = length,

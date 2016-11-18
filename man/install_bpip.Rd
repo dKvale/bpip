@@ -4,7 +4,7 @@
 \alias{install_bpip}
 \title{Install BPIP}
 \usage{
-install_bpip(dir = "bpip")
+install_bpip(dir = "bpip_exe")
 }
 \arguments{
 \item{dir}{Folder for installation}

@@ -40,15 +40,19 @@ rectangle <- function(center_x = 0,
   yvar1 <- corner_distance * sin(rotated_angle1)
   yvar2 <- corner_distance * sin(rotated_angle2)
   
-  df <- data.frame(XCOORDS = c(center_x + xvar1, 
-                               center_x + xvar2,
-                               center_x - xvar1, 
-                               center_x - xvar2),
+  df <- tibble::tibble(XCOORDS = c(center_x + xvar1, 
+                           center_x + xvar2,
+                           center_x - xvar1, 
+                           center_x - xvar2),
                    
-                   YCOORDS = c(center_y + yvar1, 
-                               center_y + yvar2,
-                               center_y - yvar1, 
-                               center_y - yvar2))
+                       YCOORDS = c(center_y + yvar1, 
+                           center_y + yvar2,
+                           center_y - yvar1, 
+                           center_y - yvar2))
+  
+  df$XCOORDS <- round(df$XCOORDS, 4)
+  
+  df$YCOORDS <- round(df$YCOORDS, 4)
   
   if(show_plot) {
   plot(df$XCOORDS,

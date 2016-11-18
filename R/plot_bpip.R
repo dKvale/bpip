@@ -23,7 +23,7 @@ plot_bpip <- function(data = bpip) {
        length(unlist(data[i, "BLD_YCOORDS"], ",")) < 3 ) {
       
       if(coord_msg) {
-        print("Building vertices were calculated based on a rectanglular footprint. To create a custom building shape, provide 3 or more x,y coordinates.")
+        print("Building vertices were calculated based on a rectanglular footprint. To create a custom building shape provide 3 or more x,y coordinates.")
         
         coord_msg <- FALSE
       }
@@ -53,8 +53,8 @@ plot_bpip <- function(data = bpip) {
   plot(xcoords,
        ycoords,
        col  = "steelblue",
-       xlab = paste("X"),
-       ylab = paste("Y"),
+       xlab = paste("South"),
+       ylab = paste("West"),
        xlim = c(source_coords[1] - bld_range, source_coords[1] + bld_range),
        ylim = c(source_coords[2] - bld_range, source_coords[2] + bld_range)
        

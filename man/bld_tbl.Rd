@@ -2,7 +2,7 @@
 % Please edit documentation in R/bld_tbl.R
 \name{bld_tbl}
 \alias{bld_tbl}
-\title{Building options}
+\title{Building parameters}
 \usage{
 bld_tbl(prj_title = "BPIP input", building = "Bld_1", height = 10,
   length = 5, width = 10, bld_rotation = 0, angle_units = "degrees",
@@ -16,7 +16,7 @@ bld_tbl(prj_title = "BPIP input", building = "Bld_1", height = 10,
 \item{dist_from_source}{Distance from center of source to the center of the building.}
 }
 \description{
-Create an input table of BPIP building options.
+Create an input table of building parameters for BPIP.
 }
 \examples{
 bld_tbl(building = "Bld_1")
