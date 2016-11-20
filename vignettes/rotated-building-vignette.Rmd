@@ -14,16 +14,16 @@ Create downwash inputs for a 10x10x10 building rotated 45 degrees and located 20
 
 ## Install BPIP to the working directory
 ```{r }
-library(bpip)
-install_bpip()
+library(installEPA)
+install_epa("bpip", "EPA")
 ```
 
 ## Create new bpip table
 ```{r }
-library(knitr)
-
+library(bpip)
 builds <- bld_tbl()
 
+library(knitr)
 kable(builds)
 ```
 

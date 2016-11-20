@@ -1,10 +1,10 @@
 #' Run BPIP
 #'
-#' Call BPIP.exe and run input file
+#' Call bpip.exe and run input file
 #' @param input Path to input file.
-#' @param output Filename for bpip results.
+#' @param output Filename for BPIP results.
 #' @param exe_folder Folder containing bpip.exe.
-#' @keywords building bpip coords rectangle
+#' @keywords building bpip downwash
 #' @export
 #' @examples
 #' run_bpip(data = "bpip.inp", 
@@ -15,12 +15,12 @@
 
 run_bpip <- function(input      = "bpip.inp", 
                      output     = "bpip_results",
-                     exe_folder = "bpip_exe") {
+                     exe_folder = "bpip") {
   
   # Check if .exe exists
-  check4bpip <- "bpipprm.exe" %in% tolower(list.files(exe_folder))
+  check_bpip <- "bpipprm.exe" %in% tolower(list.files(exe_folder))
   
-  if(!check4bpip) {
+  if(!check_bpip) {
     warning("Bpipprm.exe was not found in ", exe_folder)
     stop()
   }

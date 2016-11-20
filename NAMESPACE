@@ -2,7 +2,6 @@
 
 export(bld_coords)
 export(bld_tbl)
-export(install_bpip)
 export(plot_bpip)
 export(read_bpip_inp)
 export(read_bpip_out)

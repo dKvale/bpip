@@ -4,18 +4,17 @@
 \alias{run_bpip}
 \title{Run BPIP}
 \usage{
-run_bpip(input = "bpip.inp", output = "bpip_results",
-  exe_folder = "bpip_exe")
+run_bpip(input = "bpip.inp", output = "bpip_results", exe_folder = "bpip")
 }
 \arguments{
 \item{input}{Path to input file.}
 
-\item{output}{Filename for bpip results.}
+\item{output}{Filename for BPIP results.}
 
 \item{exe_folder}{Folder containing bpip.exe.}
 }
 \description{
-Call BPIP.exe and run input file
+Call bpip.exe and run input file
 }
 \examples{
 run_bpip(data = "bpip.inp", 
@@ -24,6 +23,5 @@ run_bpip(data = "bpip.inp",
 }
 \keyword{bpip}
 \keyword{building}
-\keyword{coords}
-\keyword{rectangle}
+\keyword{downwash}
 
