@@ -114,7 +114,7 @@ read_bpip_inp <- function(file = "bpip.inp") {
   
   
   # Create data frame
-  inp <- tibble(PRJ_TITLE         = inp[1],
+  inp <- tibble::tibble(PRJ_TITLE = inp[1],
                 BUILDING          = buildings,
                 HEIGHT            = heights,
                 LENGTH            = lengths,

@@ -10,13 +10,13 @@
 #
 #
 
-rectangle <- function(center_x = 0,
-                      center_y = 0,
-                      length   = 3,
-                      width    = 4,
-                      rotation = 0,
+rectangle <- function(center_x    = 0,
+                      center_y    = 0,
+                      length      = 3,
+                      width       = 4,
+                      rotation    = 0,
                       angle_units = "degrees",
-                      show_plot = TRUE
+                      show_plot   = TRUE
 ){
 
   if(angle_units == "degrees") {
@@ -40,32 +40,32 @@ rectangle <- function(center_x = 0,
   yvar1 <- corner_distance * sin(rotated_angle1)
   yvar2 <- corner_distance * sin(rotated_angle2)
 
-  df <- tibble::tibble(XCOORDS = c(center_x + xvar1,
-                           center_x + xvar2,
-                           center_x - xvar1,
-                           center_x - xvar2),
+  df <- tibble::tibble(x_coords = c(center_x + xvar1,
+                                    center_x + xvar2,
+                                    center_x - xvar1,
+                                    center_x - xvar2),
 
-                       YCOORDS = c(center_y + yvar1,
-                           center_y + yvar2,
-                           center_y - yvar1,
-                           center_y - yvar2))
+                       y_coords = c(center_y + yvar1,
+                                    center_y + yvar2,
+                                    center_y - yvar1,
+                                    center_y - yvar2))
 
-  df$XCOORDS <- round(df$XCOORDS, 4)
+  df$x_coords <- round(df$x_coords, 4)
 
-  df$YCOORDS <- round(df$YCOORDS, 4)
+  df$y_coords <- round(df$y_coords, 4)
 
   if(show_plot) {
-  plot(df$XCOORDS,
-       df$YCOORDS,
-       col = "steelblue",
-       xlab = paste("length =", signif(max(df$XCOORDS) - min(df$XCOORDS), 2)),
-       ylab = paste("width =", signif(max(df$YCOORDS) - min(df$YCOORDS), 2)),
-       xlim = c(min(df), max(df)),
-       ylim = c(min(df), max(df)))
+   graphics::plot(df$x_coords,
+                  df$y_coords,
+                  col = "steelblue",
+                  xlab = paste("length =", signif(max(df$x_coords) - min(df$x_coords), 2)),
+                  ylab = paste("width =", signif(max(df$y_coords) - min(df$y_coords), 2)),
+                  xlim = c(min(df), max(df)),
+                  ylim = c(min(df), max(df)))
 
-  polygon(df$XCOORDS, df$YCOORDS, col = "steelblue")
+    graphics::polygon(df$x_coords, df$y_coords, col = "steelblue")
 
-  points(center_x, center_y)
+    graphics::points(center_x, center_y)
   }
 
   return(df)

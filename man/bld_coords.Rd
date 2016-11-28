@@ -9,13 +9,13 @@ bld_coords(source_coords = c(0, 0), dist_from_source = 20,
   angle_units = "degrees", show_plot = TRUE)
 }
 \arguments{
-\item{building}{Building names. Separate multiple sources with commas.}
+\item{source_coords}{c(x,y) coordinates of emissions source.}
 }
 \description{
 Calculate building coordinates for BPIP.
 }
 \examples{
-bld_coords(building = "Bld_1")
+bld_coords(source_coords = c(0, 0))
 }
 \keyword{bpip}
 \keyword{building}

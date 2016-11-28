@@ -1,14 +1,14 @@
-#' Write building table to a BPIP input text file.
+#' Write building table to a BPIP input file.
 #'
 #' Output a BPIP input file from a data frame of building parameters.
 #' @param data Dataframe of bpip parameters.
 #' @param path Path to write to. Default is "bpip.inp".
 #' @param prj_title Title of project added to BPIP file. Defaults to path name.
-#' @param output_type A character flag controls the BPIP model's output type. For input to either an ISCST2 or an ISCLT2 input file. 
+#' @param output_type A character flag controls the BPIP model's output type.
 #'                    The three flags are:
-#'                        'p'  - Output for PRIME or AERMOD input. 
-#'                        'ST' - Output for ISCST2 input.
-#'                        'LT' - Output for ISCLT2 input.
+#'                        (1) 'p' for PRIME or AERMOD input;  
+#'                        (2) 'ST' for ISCST2 input; 
+#'                        (3) 'LT' for ISCLT2 input.
 #' @keywords building bpip write save input
 #' @export
 #' @examples
@@ -40,10 +40,10 @@ write_bpip <- function(data,
     
     inp[length(inp) +1] <- paste0(" '",  substring(data[i, "BUILDING"], 1, 8), "' ", data[i, "N_TIERS"], " ",data[i, "ELEV"])
     
-    if(is.null(data[i, "BLD_XCOORDS"]) | 
-       is.null(data[i, "BLD_YCOORDS"]) | 
-       length(unlist(data[i, "BLD_XCOORDS"], ",")) < 3 |
-       length(unlist(data[i, "BLD_YCOORDS"], ",")) < 3 ) {
+    if(is.null(data[i, "bld_xcoords"]) | 
+       is.null(data[i, "bld_ycoords"]) | 
+       length(unlist(data[i, "bld_xcoords"], ",")) < 3 |
+       length(unlist(data[i, "bld_ycoords"], ",")) < 3 ) {
       
       if(coord_msg) {
         print("Building vertices were calculated for a rectangle. To create a custom building shape, provide 3 or more x,y coordinates.")
@@ -51,13 +51,13 @@ write_bpip <- function(data,
         coord_msg <- FALSE
       }
       
-      coords <- bld_coords(source_coords       = data[i, ]$SOURCE_COORDS[[1]],
-                           dist_from_source    = data[i, ]$DIST_FROM_SOURCE,
-                           angle_from_source   = data[i, ]$ANGLE_FROM_SOURCE,
-                           length              = data[i, ]$LENGTH,
-                           width               = data[i, ]$WIDTH,
-                           bld_rotation        = data[i, ]$BLD_ROTATION,
-                           angle_units         = data[i, ]$ANGLE_UNITS,
+      coords <- bld_coords(source_coords       = data[i, ]$source_coords,
+                           dist_from_source    = data[i, ]$dist_from_source,
+                           angle_from_source   = data[i, ]$angle_from_source,
+                           length              = data[i, ]$length,
+                           width               = data[i, ]$width,
+                           bld_rotation        = data[i, ]$bld_rotation,
+                           angle_units         = data[i, ]$angle_units,
                            show_plot           = FALSE)
       
     } else {

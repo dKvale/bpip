@@ -29,23 +29,23 @@ bld_tbl <- function(prj_title           = "BPIP input",
                     source_height       = 10
                     ) {
 
-df <- tibble::tibble(PRJ_TITLE         = prj_title,
-             BUILDING          = building,
-             HEIGHT            = height,
-             LENGTH            = length,
-             WIDTH             = width,
-             BLD_ROTATION      = bld_rotation,
-             ANGLE_UNITS       = angle_units,
-             ELEV              = elev,
-             N_TIERS           = n_tiers,
-             BLD_XCOORDS       = list(bld_xcoords),
-             BLD_YCOORDS       = list(bld_ycoords),
-             DIST_FROM_SOURCE  = dist_from_source,
-             ANGLE_FROM_SOURCE = angle_from_source,
-             SOURCE_NAME       = source_name,
-             SOURCE_COORDS     = list(source_coords),
-             SOURCE_ELEV       = source_elev,
-             SOURCE_HEIGHT     = source_height)
+df <- tibble::tibble(prj_title         = prj_title,
+                     building          = building,
+                     height            = height,
+                     length            = length,
+                     width             = width,
+                     bld_rotation      = bld_rotation,
+                     angle_units       = angle_units,
+                     elev              = elev,
+                     n_tiers           = n_tiers,
+                     bld_xcoords       = list(bld_xcoords),
+                     bld_ycoords       = list(bld_ycoords),
+                     dist_from_source  = dist_from_source,
+                     angle_from_source = angle_from_source,
+                     source_name       = source_name,
+                     source_coords     = list(source_coords),
+                     source_elev       = source_elev,
+                     source_height     = source_height)
 
 return(df)
 }

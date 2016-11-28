@@ -31,7 +31,7 @@ read_bpip_out <- function(file    = "bpip.out",
   out <- gsub("\\s+", ",", out)
   
   # Add column names
-  out <- c("SO,INPUT,STACK,ANG1,ANG2,ANG3,ANG4,ANG5,ANG6", out)
+  out <- c("SO,INPUT,STACK,ANG1,ANG2,ANG3,ANG4,ANG5,ANG6\n", out)
     
   # Collapse to a single string
   out <- paste0(out, collapse = "\n")

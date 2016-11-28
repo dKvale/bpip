@@ -72,14 +72,14 @@ write_bpip(builds, "rotated_building.inp")
 
 ## Run bpip
 ```{r }
-run_bpip("rotated_building.inp", "rotated_results")
+#run_bpip("rotated_building.inp", "rotated_results")
 ```
 
 ## Read results
 ```{r }
-results <- read_bpip_out("rotated_results.out", as_text = FALSE)
+#results <- read_bpip_out("rotated_results.out", as_text = FALSE)
 
-kable(results)
+#kable(results)
 ```
 
 

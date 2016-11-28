@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_bpip.R
 \name{write_bpip}
 \alias{write_bpip}
-\title{Write building table to a BPIP input text file.}
+\title{Write building table to a BPIP input file.}
 \usage{
 write_bpip(data, path = "bpip.inp", prj_title = gsub("[.]inp", "", path),
   output_type = "p")
@@ -14,11 +14,11 @@ write_bpip(data, path = "bpip.inp", prj_title = gsub("[.]inp", "", path),
 
 \item{prj_title}{Title of project added to BPIP file. Defaults to path name.}
 
-\item{output_type}{A character flag controls the BPIP model's output type. For input to either an ISCST2 or an ISCLT2 input file. 
+\item{output_type}{A character flag controls the BPIP model's output type.
 The three flags are:
-    'p'  - Output for PRIME or AERMOD input. 
-    'ST' - Output for ISCST2 input.
-    'LT' - Output for ISCLT2 input.}
+    (1) 'p' for PRIME or AERMOD input;  
+    (2) 'ST' for ISCST2 input; 
+    (3) 'LT' for ISCLT2 input.}
 }
 \description{
 Output a BPIP input file from a data frame of building parameters.
