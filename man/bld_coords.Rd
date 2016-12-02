@@ -4,18 +4,18 @@
 \alias{bld_coords}
 \title{Generate building coordinates}
 \usage{
-bld_coords(source_coords = c(0, 0), dist_from_source = 20,
-  angle_from_source = 0, length = 5, width = 10, bld_rotation = 0,
+bld_coords(source_xy = c(0, 0), dist_from_source = 20,
+  angle_from_source = 0, width_x = 5, length_y = 10, bld_rotation = 0,
   angle_units = "degrees", show_plot = TRUE)
 }
 \arguments{
-\item{source_coords}{c(x,y) coordinates of emissions source.}
+\item{source_xy}{c(x,y) coordinates of emissions source.}
 }
 \description{
 Calculate building coordinates for BPIP.
 }
 \examples{
-bld_coords(source_coords = c(0, 0))
+bld_coords(source_xy = c(0, 0))
 }
 \keyword{bpip}
 \keyword{building}

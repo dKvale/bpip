@@ -7,7 +7,7 @@
 read_bpip_out(file = "bpip.out", as_text = TRUE)
 }
 \arguments{
-\item{file}{File location. Default is "bpip.out" in the working directory.}
+\item{file}{A path to a file or a text string containing line breaks. Default is "bpip.out".}
 
 \item{as_text}{Output results as a character string. If FALSE ouput as a dataframe.}
 }
@@ -15,7 +15,48 @@ read_bpip_out(file = "bpip.out", as_text = TRUE)
 Read a bpip.out file into a dataframe.
 }
 \examples{
-read_bpip_out(file = "bpip.out")
+
+bpip_out <- "bpip                                                                          
+
+BPIP (Dated: 04274)
+DATE : 10/ 7/2016
+TIME : 13:16:32
+                                                                       
+BPIP output is in meters
+
+
+SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00   10.00
+SO BUILDHGT Stack_1    10.00   10.00   10.00   10.00   10.00   10.00
+SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00   10.00
+SO BUILDHGT Stack_1    10.00   10.00   10.00   10.00   10.00   10.00
+SO BUILDHGT Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00   11.16
+SO BUILDWID Stack_1    11.11   10.72   10.00   10.72   11.11   11.16
+SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00   11.16
+SO BUILDWID Stack_1    11.11   10.72   10.00   10.72   11.11   11.16
+SO BUILDWID Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    9.33
+SO BUILDLEN Stack_1     8.12    6.66    5.00    6.66    8.12    9.33
+SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    9.33
+SO BUILDLEN Stack_1     8.12    6.66    5.00    6.66    8.12    9.33
+SO BUILDLEN Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00  -21.99
+SO XBADJ    Stack_1   -22.85  -23.03  -22.50  -23.03  -22.85  -21.99
+SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00   12.66
+SO XBADJ    Stack_1    14.73   16.37   17.50   16.37   14.73   12.66
+SO XBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00   10.00
+SO YBADJ    Stack_1     6.84    3.47    0.00   -3.47   -6.84  -10.00
+SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00
+SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00  -10.00
+SO YBADJ    Stack_1    -6.84   -3.47    0.00    3.47    6.84   10.00
+SO YBADJ    Stack_1     0.00    0.00    0.00    0.00    0.00    0.00"
+
+read_bpip_out(file = bpip_out)
 }
 \keyword{bpip}
 \keyword{output}

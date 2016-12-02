@@ -7,13 +7,29 @@
 read_bpip_inp(file = "bpip.inp")
 }
 \arguments{
-\item{path}{File location. Default is "bpip.inp" in the working directory.}
+\item{file}{A path to a file or a text string containing line breaks. Default is "bpip.inp".}
 }
 \description{
 Read a bpip.inp file into a dataframe.
 }
 \examples{
-read_bpip_inp(file = "bpip.inp")
+bpip_inp <- "'Example1'
+'p'
+'METERS' 1.00
+'UTMN' 0.00
+1
+'Bld_1' 1 0
+4 10
+-22.5 5
+-17.5 5
+-17.5 -5
+-22.5 -5
+1
+'Stack_1' 0 10 0 0
+'Stack_2' 0 10 0 0
+"
+
+read_bpip_inp(file = bpip_inp)
 }
 \keyword{bpip}
 \keyword{input}

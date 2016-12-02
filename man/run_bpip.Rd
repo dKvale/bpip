@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_bpip.R
 \name{run_bpip}
 \alias{run_bpip}
-\title{Run BPIP}
+\title{Run the BPIP downwash model}
 \usage{
 run_bpip(input = "bpip.inp", output = "bpip_results", exe_folder = "bpip")
 }
@@ -14,12 +14,14 @@ run_bpip(input = "bpip.inp", output = "bpip_results", exe_folder = "bpip")
 \item{exe_folder}{Folder containing bpip.exe.}
 }
 \description{
-Call bpip.exe and run input file
+Call bpip.exe and run input file.
 }
 \examples{
-run_bpip(data = "bpip.inp", 
-         output = "bpip_results", 
-         exe_folder = "bpip_exe")
+\dontrun{
+run_bpip(input      = "bpip.inp", 
+         output     = "bpip_results", 
+         exe_folder = "EPA/bpip")
+}
 }
 \keyword{bpip}
 \keyword{building}

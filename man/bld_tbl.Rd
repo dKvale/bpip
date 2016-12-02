@@ -5,10 +5,10 @@
 \title{Building parameters}
 \usage{
 bld_tbl(prj_title = "BPIP input", building = "Bld_1", height = 10,
-  length = 5, width = 10, bld_rotation = 0, angle_units = "degrees",
+  width_x = 5, length_y = 10, bld_rotation = 0, angle_units = "degrees",
   elev = 0, n_tiers = 1, bld_xcoords = c(), bld_ycoords = c(),
   dist_from_source = 20, angle_from_source = 0, source_name = "Stack_1",
-  source_coords = c(0, 0), source_elev = 0, source_height = 10)
+  source_xy = c(0, 0), source_elev = 0, source_height = 10)
 }
 \arguments{
 \item{building}{Building names. Separate multiple sources with commas.}

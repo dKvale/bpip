@@ -4,15 +4,17 @@
 \alias{plot_bpip}
 \title{Plot buildings from a BPIP dataframe}
 \usage{
-plot_bpip(data = bpip)
+plot_bpip(data)
 }
 \arguments{
-\item{data}{Dataframe of bpip parameters.}
+\item{data}{Data frame of bpip parameters. Run 'bld_tbl()' for an example.}
 }
 \description{
 Plot a BPIP building dataframe.
 }
 \examples{
+bpip_blds <- bld_tbl()
+
 plot_bpip(data = bpip_blds)
 }
 \keyword{bpip}

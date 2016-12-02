@@ -24,7 +24,9 @@ The three flags are:
 Output a BPIP input file from a data frame of building parameters.
 }
 \examples{
-write_bpip(data = facility_blds)
+bpip_blds <- bld_tbl()
+
+write_bpip(data = bpip_blds)
 }
 \keyword{bpip}
 \keyword{building}
