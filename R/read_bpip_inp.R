@@ -1,32 +1,52 @@
 #' Read BPIP input file
 #'
 #' Read a bpip.inp file into a dataframe.
-#' @param path File location. Default is "bpip.inp" in the working directory.
+#' @param file A path to a file or a text string containing line breaks. Default is "bpip.inp".
 #' @keywords read bpip input
 #' @export
 #' @examples
-#' read_bpip_inp(file = "bpip.inp")
+#' bpip_inp <- "'Example1'
+#' 'p'
+#' 'METERS' 1.00
+#' 'UTMN' 0.00
+#' 1
+#' 'Bld_1' 1 0
+#' 4 10
+#' -22.5 5
+#' -17.5 5
+#' -17.5 -5
+#' -22.5 -5
+#' 1
+#' 'Stack_1' 0 10 0 0
+#' 'Stack_2' 0 10 0 0
+#'"
+#'
+#' read_bpip_inp(file = bpip_inp)
 # 
 #
 
 read_bpip_inp <- function(file = "bpip.inp") {
   
-  inp <- readLines(file)
-  
+  if(grepl("\n", file)) { 
+    inp <- readLines(textConnection(file))
+  } else { 
+    inp <- readLines(file)
+    }
+     
   buildings   <- c()
   n_tiers     <- c()
   heights     <- c()
-  widths      <- c()
   lengths     <- c()
+  widths      <- c()
   elevs       <- c()
-  xcoords     <- c()
-  ycoords     <- c()
+  x_coords    <- c()
+  y_coords    <- c()
   bld_xcoords <- list()[0]
   bld_ycoords <- list()[0]
   skip        <- FALSE
   
   # Search for the last line not containing a single or double quote 
-  sources_start <- max((1:length(inp))[!grepl("[']", inp) & !grepl('["]', inp)], na.rm=T)
+  sources_start <- max((1:(length(inp)-1))[!grepl("[']", inp) & !grepl('["]', inp)], na.rm=T)
   
   
   for(i in 6:(sources_start - 1)) {
@@ -38,13 +58,13 @@ read_bpip_inp <- function(file = "bpip.inp") {
       # Check if line contains building name
       if(grepl("[']", line[2]) | grepl('["]', line[2])) {
           
-          if(length(xcoords) > 1) {
-            lengths <- c(lengths, signif(max(xcoords) - min(xcoords), 2))
-            widths  <- c(widths, signif(max(ycoords) - min(ycoords), 2))
-            bld_xcoords[length(bld_xcoords)+1] <- list(xcoords)
-            bld_ycoords[length(bld_ycoords)+1] <- list(ycoords)
-            xcoords <- c()
-            ycoords <- c()
+          if(length(x_coords) > 1) {
+            widths <- c(widths, signif(max(x_coords) - min(x_coords), 2))
+            lengths  <- c(lengths, signif(max(y_coords) - min(y_coords), 2))
+            bld_xcoords[length(bld_xcoords)+1] <- list(x_coords)
+            bld_ycoords[length(bld_ycoords)+1] <- list(y_coords)
+            x_coords <- c()
+            y_coords <- c()
           }
             
           buildings <- c(buildings, line[2])
@@ -55,20 +75,20 @@ read_bpip_inp <- function(file = "bpip.inp") {
       
           skip <- TRUE
       } else {
-         xcoords <- c(xcoords, as.numeric(line[2]))
-         ycoords <- c(ycoords, as.numeric(strsplit(paste0(" ", inp[i]), "\\s+")[[1]][3]) )
+         x_coords <- c(x_coords, as.numeric(line[2]))
+         y_coords <- c(y_coords, as.numeric(strsplit(paste0(" ", inp[i]), "\\s+")[[1]][3]) )
       }
     
     } else skip <- FALSE
   }
   
-  if(length(xcoords) > 1) {
-    lengths <- c(lengths, signif(max(xcoords) - min(xcoords), 2))
-    widths  <- c(widths, signif(max(ycoords) - min(ycoords), 2))
-    bld_xcoords[length(bld_xcoords)+1] <- list(xcoords)
-    bld_ycoords[length(bld_ycoords)+1] <- list(ycoords)
-    xcoords <- c()
-    ycoords <- c()
+  if(length(x_coords) > 1) {
+    widths <- c(widths, signif(max(x_coords) - min(x_coords), 2))
+    lengths  <- c(lengths, signif(max(y_coords) - min(y_coords), 2))
+    bld_xcoords[length(bld_xcoords)+1] <- list(x_coords)
+    bld_ycoords[length(bld_ycoords)+1] <- list(y_coords)
+    x_coords <- c()
+    y_coords <- c()
   }
   
   sources      <- c()
@@ -85,7 +105,7 @@ read_bpip_inp <- function(file = "bpip.inp") {
       sources     <-  c(sources, line[[2]])
       src_elevs   <-  c(src_elevs, line[[3]])
       src_heights <-  c(src_heights, line[[4]])
-      src_coords[length(src_coords) + 1]  <-  list(as.numeric(c(line[[5]]), line[[6]]))
+      src_coords[length(src_coords) + 1]  <-  list(as.numeric(c(line[[5]], line[[6]])))
     } 
   } 
   
@@ -96,7 +116,7 @@ read_bpip_inp <- function(file = "bpip.inp") {
     
     bld_center <- c(mean(bld_xcoords[[i]]), mean(bld_ycoords[[i]]))
     
-    distances <- c(distances, dist(cbind(src_coords[[1]], bld_center))[[1]])
+    distances <- c(distances, stats::dist(cbind(src_coords[[1]], bld_center))[[1]])
     
     # Normalize coordinates
     a <- c(0, 1)
@@ -114,25 +134,24 @@ read_bpip_inp <- function(file = "bpip.inp") {
   
   
   # Create data frame
-  inp <- tibble::tibble(PRJ_TITLE = inp[1],
-                BUILDING          = buildings,
-                HEIGHT            = heights,
-                LENGTH            = lengths,
-                WIDTH             = widths,
-                BLD_ROTATION      = NA,
-                ANGLE_UNITS       = "degrees",
-                ELEV              = elevs,
-                N_TIERS           = n_tiers,
-                BLD_XCOORDS       = bld_xcoords,
-                BLD_YCOORDS       = bld_ycoords,
-                DIST_FROM_SOURCE  = distances,
-                ANGLE_FROM_SOURCE = angles,
-                SOURCE_NAME       = sources,
-                SOURCE_COORDS     = src_coords,
-                SOURCE_ELEV       = src_elevs,
-                SOURCE_HEIGHT     = src_heights
-                )
-      
+  inp  <- tibble::tibble(prj_title         = inp[1],
+                         building          = buildings,
+                         height            = heights,
+                         width_x           = widths,
+                         length_y          = lengths,
+                         bld_rotation      = NA,
+                         angle_units       = "degrees",
+                         elev              = elevs,
+                         n_tiers           = n_tiers,
+                         bld_xcoords       = list(bld_xcoords),
+                         bld_ycoords       = list(bld_ycoords),
+                         dist_from_source  = distances,
+                         angle_from_source = angles,
+                         source_name       = list(sources),
+                         source_xy         = list(src_coords),
+                         source_elev       = list(src_elevs),
+                         source_height     = list(src_heights))
+
   return(inp)
   
 }
