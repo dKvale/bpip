@@ -1,19 +1,19 @@
 #' Generate building coordinates
 #'
 #' Calculate building coordinates for BPIP.
-#' @param source_coords c(x,y) coordinates of emissions source.
+#' @param source_xy c(x,y) coordinates of emissions source.
 #' @keywords building bpip input coords
 #' @export
 #' @examples
-#' bld_coords(source_coords = c(0, 0))
+#' bld_coords(source_xy = c(0, 0))
 # 
 # 
 
-bld_coords <- function(source_coords       = c(0, 0),
+bld_coords <- function(source_xy           = c(0, 0),
                        dist_from_source    = 20,
                        angle_from_source   = 0,
-                       length              = 5,
-                       width               = 10,
+                       width_x             = 5,
+                       length_y            = 10,
                        bld_rotation        = 0,
                        angle_units         = "degrees",
                        show_plot           = TRUE
@@ -24,32 +24,32 @@ bld_coords <- function(source_coords       = c(0, 0),
     bld_rotation      <- -(bld_rotation - 450) * pi/180
   }
   
-  bld_center_x <- source_coords[1] + round(dist_from_source * cos(angle_from_source), 2)
+  bld_center_x <- source_xy[1] + round(dist_from_source * cos(angle_from_source), 2)
   
-  bld_center_y <- source_coords[2] + round(dist_from_source * sin(angle_from_source), 2)
+  bld_center_y <- source_xy[2] + round(dist_from_source * sin(angle_from_source), 2)
   
-  bld_corners <- rectangle(center_x    = bld_center_x,
-                           center_y    = bld_center_y,
-                           length      = length,
-                           width       = width,
-                           rotation    = bld_rotation,
-                           angle_units = "radians",
-                           show_plot   = FALSE)
+  bld_corners <- rotate_bld(center_x    = bld_center_x,
+                            center_y    = bld_center_y,
+                            width_x     = width_x,
+                            length_y    = length_y,
+                            rotation    = bld_rotation,
+                            angle_units = "radians",
+                            show_plot   = FALSE)
   
   if(show_plot) {
-    graphics::plot(bld_corners$XCOORDS,
-                   bld_corners$YCOORDS,
+    graphics::plot(bld_corners$x_coords,
+                   bld_corners$y_coords,
                    col  = "steelblue",
-                   xlab = paste("length =", signif(max(bld_corners$XCOORDS) - min(bld_corners$XCOORDS), 2)),
-                   ylab = paste("width =", signif(max(bld_corners$YCOORDS) - min(bld_corners$YCOORDS), 2)),
-                   xlim = c(source_coords[1] - dist_from_source - width, 
-                            source_coords[1] + dist_from_source + width),
-                   ylim = c(source_coords[1] - dist_from_source - length,
-                            source_coords[1] + dist_from_source + length))
+                   xlab = paste("length =", signif(max(bld_corners$x_coords) - min(bld_corners$x_coords), 2)),
+                   ylab = paste("width =", signif(max(bld_corners$y_coords) - min(bld_corners$y_coords), 2)),
+                   xlim = c(source_xy[1] - dist_from_source - length_y, 
+                            source_xy[1] + dist_from_source + length_y),
+                   ylim = c(source_xy[1] - dist_from_source - width_x,
+                            source_xy[1] + dist_from_source + width_x))
   
-    graphics::polygon(bld_corners$XCOORDS, bld_corners$YCOORDS, col = "steelblue")
+    graphics::polygon(bld_corners$x_coords, bld_corners$y_coords, col = "steelblue")
   
-    graphics::points(source_coords[1], source_coords[2], pch =16, col = "orange")
+    graphics::points(source_xy[1], source_xy[2], pch =16, col = "orange")
   }
   
   return(bld_corners)

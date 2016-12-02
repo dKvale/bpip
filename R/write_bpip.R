@@ -12,7 +12,9 @@
 #' @keywords building bpip write save input
 #' @export
 #' @examples
-#' write_bpip(data = facility_blds)
+#' bpip_blds <- bld_tbl()
+#' 
+#' write_bpip(data = bpip_blds)
 # 
 # 
 
@@ -32,13 +34,13 @@ write_bpip <- function(data,
   
   inp[4] <- paste0("'UTMN' 0.00")           # Coordinate orientation
   
-  inp[5] <- length(unique(data$BUILDING))           # Number of buildings
+  inp[5] <- length(unique(data$building))           # Number of buildings
   
   coord_msg <- TRUE                         # Prevent repeat messages
   
   for(i in 1:nrow(data)) {                     # Building names and tier coordinates
     
-    inp[length(inp) +1] <- paste0(" '",  substring(data[i, "BUILDING"], 1, 8), "' ", data[i, "N_TIERS"], " ",data[i, "ELEV"])
+    inp[length(inp) +1] <- paste0(" '",  substring(data[i, "building"], 1, 8), "' ", data[i, "n_tiers"], " ",data[i, "elev"])
     
     if(is.null(data[i, "bld_xcoords"]) | 
        is.null(data[i, "bld_ycoords"]) | 
@@ -51,36 +53,36 @@ write_bpip <- function(data,
         coord_msg <- FALSE
       }
       
-      coords <- bld_coords(source_coords       = data[i, ]$source_coords,
+      coords <- bld_coords(source_xy           = data[i, ]$source_xy[[1]],
                            dist_from_source    = data[i, ]$dist_from_source,
                            angle_from_source   = data[i, ]$angle_from_source,
-                           length              = data[i, ]$length,
-                           width               = data[i, ]$width,
+                           width_x             = data[i, ]$width_x,
+                           length_y            = data[i, ]$length_y,
                            bld_rotation        = data[i, ]$bld_rotation,
                            angle_units         = data[i, ]$angle_units,
                            show_plot           = FALSE)
       
     } else {
       
-      coords <- data.frame(XCOORDS = unlist(data[i, "BLD_XCOORDS"]),
-                           YCOORDS = unlist(data[i, "BLD_YCOORDS"]))
+      coords <- data.frame(x_coords = unlist(data[i, "bld_xcoords"]),
+                           y_coords = unlist(data[i, "bld_ycoords"]))
     }
      
     
-    inp[length(inp) +1] <- paste("   ", length(coords$XCOORDS) , data[i, "HEIGHT"])
+    inp[length(inp) +1] <- paste("   ", length(coords$x_coords) , data[i, "height"])
     
     for(n in 1:nrow(coords)) {
-      inp[length(inp) +1] <- paste("     ", coords[n, "XCOORDS"], coords[n, "YCOORDS"])
+      inp[length(inp) +1] <- paste("     ", coords[n, "x_coords"], coords[n, "y_coords"])
     }
     
   }
   
   inp[length(inp) +1] <- 1       # Number of stacks
   
-  inp[length(inp) +1] <- paste0("  '", substring(data[1, "SOURCE_NAME"], 1, 8), "' ", 
-                                data[1, "SOURCE_ELEV"], " ", 
-                                data[1, "SOURCE_HEIGHT"], " ",
-                                paste(unlist(data[1, ]$SOURCE_COORDS), collapse=" "))
+  inp[length(inp) +1] <- paste0("  '", substring(data[1, "source_name"], 1, 8), "' ", 
+                                data[1, "source_elev"], " ", 
+                                data[1, "source_height"], " ",
+                                paste(unlist(data[1, ]$source_xy), collapse=" "))
   
   cat("\nGenerated input file: \n\n")
   invisible(writeLines(inp))

@@ -1,17 +1,19 @@
 #' Plot buildings from a BPIP dataframe
 #'
 #' Plot a BPIP building dataframe.
-#' @param data Dataframe of bpip parameters.
+#' @param data Data frame of bpip parameters. Run 'bld_tbl()' for an example.
 #' @keywords plot bpip buildings downwash
 #' @export
 #' @examples
+#' bpip_blds <- bld_tbl()
+#' 
 #' plot_bpip(data = bpip_blds)
 # 
 #
 
-plot_bpip <- function(data = bpip) {
+plot_bpip <- function(data) {
   
-  source_coords <- data[1, ]$source_coords[[1]]
+  source_xy <- data[1, ]$source_xy[[1]]
 
   coord_msg <- TRUE
   
@@ -28,11 +30,11 @@ plot_bpip <- function(data = bpip) {
         coord_msg <- FALSE
       }
       
-      coords <- bld_coords(source_coords       = data[i, ]$source_coords,
+      coords <- bld_coords(source_xy           = data[i, ]$source_xy[[1]],
                            dist_from_source    = data[i, ]$dist_from_source,
                            angle_from_source   = data[i, ]$angle_from_source,
-                           length              = data[i, ]$length,
-                           width               = data[i, ]$width,
+                           width_x             = data[i, ]$width_x,
+                           length_y            = data[i, ]$length_y,
                            bld_rotation        = data[i, ]$bld_rotation,
                            angle_units         = data[i, ]$angle_units,
                            show_plot           = FALSE)
@@ -43,24 +45,22 @@ plot_bpip <- function(data = bpip) {
     }
   }
   
-  
   xcoords <- unlist(data$bld_xcoords)
   ycoords <- unlist(data$bld_ycoords)
-  #coords  <- c(xcoords, ycoords, source_coords) 
   
-  bld_range <- max(abs(source_coords[2] - ycoords), abs(source_coords[1] - xcoords))
+  bld_range <- max(abs(source_xy[2] - ycoords), abs(source_xy[1] - xcoords))
   
   graphics::plot(xcoords,
                  ycoords,
                  col  = "steelblue",
                  xlab = paste("South"),
                  ylab = paste("West"),
-                 xlim = c(source_coords[1] - bld_range, source_coords[1] + bld_range),
-                 ylim = c(source_coords[2] - bld_range, source_coords[2] + bld_range))
+                 xlim = c(source_xy[1] - bld_range, source_xy[1] + bld_range),
+                 ylim = c(source_xy[2] - bld_range, source_xy[2] + bld_range))
   
   for(i in 1:nrow(data)) {
-    graphics::polygon(unlist(data[i, ]$BLD_XCOORDS), unlist(data[i,]$BLD_YCOORDS), col = "steelblue") 
+    graphics::polygon(unlist(data[i, ]$bld_xcoords), unlist(data[i,]$bld_ycoords), col = "steelblue") 
     }
   
-  graphics::points(source_coords[1], source_coords[2], pch =13, col = "orange", cex=1.8)
+  graphics::points(source_xy[1], source_xy[2], pch =13, col = "orange", cex=1.8)
 }

@@ -1,16 +1,17 @@
-#' Run BPIP
+#' Run the BPIP downwash model
 #'
-#' Call bpip.exe and run input file
+#' Call bpip.exe and run input file.
 #' @param input Path to input file.
 #' @param output Filename for BPIP results.
 #' @param exe_folder Folder containing bpip.exe.
 #' @keywords building bpip downwash
 #' @export
 #' @examples
-#' run_bpip(data = "bpip.inp", 
-#'          output = "bpip_results", 
-#'          exe_folder = "bpip_exe")
-# 
+#' \dontrun{
+#' run_bpip(input      = "bpip.inp", 
+#'          output     = "bpip_results", 
+#'          exe_folder = "EPA/bpip")
+#' }
 # 
 
 run_bpip <- function(input      = "bpip.inp", 
