@@ -4,7 +4,7 @@ Title: Interface to EPA's downwash model BPIP
 Version: 0.0.0.9000
 Authors@R: person("Dorian", "Kvale", email = "dorian.kvale@state.mn.us", role = c("aut", "cre"))
 Description: A data frame interface for EPA's air dispersion downwash model BPIP.
-Depends: R (>= 3.2.4)
+Depends: R (>= 3)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
