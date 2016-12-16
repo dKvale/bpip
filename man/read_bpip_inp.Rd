@@ -4,7 +4,7 @@
 \alias{read_bpip_inp}
 \title{Read BPIP input file}
 \usage{
-read_bpip_inp(file = "bpip.inp")
+read_bpip_inp(file)
 }
 \arguments{
 \item{file}{A path to a file or a text string containing line breaks. Default is "bpip.inp".}

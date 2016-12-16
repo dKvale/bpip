@@ -4,7 +4,7 @@
 \alias{read_bpip_out}
 \title{Read BPIP output file}
 \usage{
-read_bpip_out(file = "bpip.out", as_text = TRUE)
+read_bpip_out(file, as_text = TRUE)
 }
 \arguments{
 \item{file}{A path to a file or a text string containing line breaks. Default is "bpip.out".}

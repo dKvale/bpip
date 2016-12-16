@@ -2,13 +2,13 @@
 % Please edit documentation in R/write_bpip.R
 \name{write_bpip}
 \alias{write_bpip}
-\title{Write building table to a BPIP input file.}
+\title{Write a data frame to a BPIP input file.}
 \usage{
-write_bpip(data, path = "bpip.inp", prj_title = gsub("[.]inp", "", path),
+write_bpip(data, path = NULL, prj_title = gsub("[.]inp", "", path),
   output_type = "p")
 }
 \arguments{
-\item{data}{Dataframe of bpip parameters.}
+\item{data}{Data frame of BPIP parameters.}
 
 \item{path}{Path to write to. Default is "bpip.inp".}
 
@@ -26,7 +26,7 @@ Output a BPIP input file from a data frame of building parameters.
 \examples{
 bpip_blds <- bld_tbl()
 
-write_bpip(data = bpip_blds)
+write_bpip(data = bpip_blds, path = "bpip.inp")
 }
 \keyword{bpip}
 \keyword{building}
