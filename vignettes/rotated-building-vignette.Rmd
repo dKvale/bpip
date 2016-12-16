@@ -9,7 +9,6 @@ output:
 vignette: >
   %\VignetteIndexEntry{bpip: Rotated building}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{}
 ---
 
 ## Running BPIP for a rotated building

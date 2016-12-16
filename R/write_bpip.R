@@ -19,7 +19,7 @@
 # 
 
 write_bpip <- function(data, 
-                       path        = "bpip.inp",
+                       path,
                        prj_title   = gsub("[.]inp", "", path),
                        output_type = "p"
                        ) {

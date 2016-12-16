@@ -10,7 +10,7 @@
 # 
 
 bld_coords <- function(source_xy           = c(0, 0),
-                       dist_from_source    = 20,
+                       dist_from_source    = 10,
                        angle_from_source   = 0,
                        width_x             = 5,
                        length_y            = 10,

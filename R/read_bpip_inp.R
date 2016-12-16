@@ -25,7 +25,7 @@
 # 
 #
 
-read_bpip_inp <- function(file = "bpip.inp") {
+read_bpip_inp <- function(file) {
   
   if(grepl("\n", file)) { 
     inp <- readLines(textConnection(file))

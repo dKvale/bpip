@@ -51,7 +51,7 @@
 # 
 #
 
-read_bpip_out <- function(file    = "bpip.out",
+read_bpip_out <- function(file,
                           as_text = TRUE) {
   
   if(grepl("\n", file)) { 
