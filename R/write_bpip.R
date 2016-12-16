@@ -1,7 +1,7 @@
-#' Write building table to a BPIP input file.
+#' Write a data frame to a BPIP input file.
 #'
 #' Output a BPIP input file from a data frame of building parameters.
-#' @param data Dataframe of bpip parameters.
+#' @param data Data frame of BPIP parameters.
 #' @param path Path to write to. Default is "bpip.inp".
 #' @param prj_title Title of project added to BPIP file. Defaults to path name.
 #' @param output_type A character flag controls the BPIP model's output type.
@@ -14,7 +14,7 @@
 #' @examples
 #' bpip_blds <- bld_tbl()
 #' 
-#' write_bpip(data = bpip_blds)
+#' write_bpip(data = bpip_blds, path = "bpip.inp")
 # 
 # 
 

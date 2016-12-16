@@ -18,7 +18,7 @@ This example creates downwash inputs for a 10x10x10 building that is rotated 45 
 ## Install BPIP to the working directory
 ```{r eval = T}
 library(installEPA)
-install_epa("bpip", "EPA")
+#install_epa("bpip", "EPA")
 ```
 
 ## Create new bpip table
