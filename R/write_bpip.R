@@ -19,7 +19,7 @@
 # 
 
 write_bpip <- function(data, 
-                       path,
+                       path        = NULL,
                        prj_title   = gsub("[.]inp", "", path),
                        output_type = "p"
                        ) {
@@ -87,7 +87,7 @@ write_bpip <- function(data,
   cat("\nGenerated input file: \n\n")
   invisible(writeLines(inp))
   
-  if(is.null(path) | nchar(path) < 1) {
+  if(is.null(path) || nchar(path) < 1) {
     return(inp)
   } else  writeLines(inp, path)
     
