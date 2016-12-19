@@ -13,9 +13,9 @@ plot_bpip(data)
 Plot a BPIP building dataframe.
 }
 \examples{
-bpip_blds <- bld_tbl()
+buildings <- new_bpip()
 
-plot_bpip(data = bpip_blds)
+plot_bpip(data = buildings)
 }
 \keyword{bpip}
 \keyword{buildings}

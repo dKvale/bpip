@@ -24,7 +24,7 @@ library(installEPA)
 ## Create new bpip table
 ```{r }
 library(bpip)
-builds <- bld_tbl()
+builds <- new_bpip()
 
 library(knitr)
 kable(builds)
@@ -70,19 +70,19 @@ plot_bpip(builds)
 
 ## Create bpip input file
 ```{r }
-write_bpip(builds, "rotated_building.inp")
+#write_bpip(builds, "rotated_building.inp")
 ```
 
 ## Run bpip
 ```{r }
-run_bpip("rotated_building.inp", "rotated_results", exe_folder = "EPA/bpip")
+#run_bpip("rotated_building.inp", "rotated_results", exe_folder = "EPA/bpip")
 ```
 
 ## Read results
 ```{r }
-results <- read_bpip_out(file = "rotated_results.out", as_text = FALSE)
+#results <- read_bpip_out(file = "rotated_results.out", as_text = FALSE)
 
-kable(results)
+#kable(results)
 ```
 
 

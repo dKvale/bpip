@@ -5,9 +5,9 @@
 #' @keywords plot bpip buildings downwash
 #' @export
 #' @examples
-#' bpip_blds <- bld_tbl()
+#' buildings <- new_bpip()
 #' 
-#' plot_bpip(data = bpip_blds)
+#' plot_bpip(data = buildings)
 # 
 #
 

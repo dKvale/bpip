@@ -132,7 +132,6 @@ read_bpip_inp <- function(file) {
     angles    <- c(angles, ang_degrees)
   }
   
-  
   # Create data frame
   inp  <- tibble::tibble(prj_title         = inp[1],
                          building          = buildings,

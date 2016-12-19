@@ -12,9 +12,9 @@
 #' @keywords building bpip write save input
 #' @export
 #' @examples
-#' bpip_blds <- bld_tbl()
+#' buildings <- new_bpip()
 #' 
-#' write_bpip(data = bpip_blds, path = "bpip.inp")
+#' write_bpip(data = buildings, path = "bpip.inp")
 # 
 # 
 
