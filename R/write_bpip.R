@@ -17,7 +17,6 @@
 #' write_bpip(data = buildings, path = "bpip.inp")
 # 
 # 
-
 write_bpip <- function(data, 
                        path        = NULL,
                        prj_title   = gsub("[.]inp", "", path),
@@ -34,13 +33,13 @@ write_bpip <- function(data,
   
   inp[4] <- paste0("'UTMN' 0.00")           # Coordinate orientation
   
-  inp[5] <- length(unique(data$building))           # Number of buildings
+  inp[5] <- length(unique(data$bld_id))     # Number of buildings
   
   coord_msg <- TRUE                         # Prevent repeat messages
   
-  for(i in 1:nrow(data)) {                     # Building names and tier coordinates
+  for(i in 1:nrow(data)) {                  # Building names and tier coordinates
     
-    inp[length(inp) +1] <- paste0(" '",  substring(data[i, "building"], 1, 8), "' ", data[i, "n_tiers"], " ",data[i, "elev"])
+    inp[length(inp) +1] <- paste0(" '",  substring(data[i, "bld_id"], 1, 8), "' ", data[i, "n_tiers"], " ",data[i, "bld_elev"])
     
     if(is.null(data[i, "bld_xcoords"]) | 
        is.null(data[i, "bld_ycoords"]) | 
@@ -69,7 +68,7 @@ write_bpip <- function(data,
     }
      
     
-    inp[length(inp) +1] <- paste("   ", length(coords$x_coords) , data[i, "height"])
+    inp[length(inp) +1] <- paste("   ", length(coords$x_coords) , data[i, "bld_height"])
     
     for(n in 1:nrow(coords)) {
       inp[length(inp) +1] <- paste("     ", coords[n, "x_coords"], coords[n, "y_coords"])

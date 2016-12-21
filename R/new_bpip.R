@@ -2,7 +2,7 @@
 #'
 #' Create an input table of building parameters for BPIP.
 #' @param bld_id Building ID or name.
-#' @param height Height of building in meters. 
+#' @param bld_height Height of building in meters. 
 #' @param width_x Width of building from East to West in meters. 
 #' @param length_y Length of building from North to South in meters. 
 #' @param bld_rotation Building rotation from North in degrees. 
@@ -18,12 +18,12 @@
 # 
 new_bpip <- function(prj_title           = "BPIP input",
                      bld_id              = "Bld_1",
-                     height              = 10,
+                     bld_height          = 10,
                      width_x             = 5,
                      length_y            = 10,
                      bld_rotation        = 0,
                      angle_units         = "degrees",
-                     elev                = 0,
+                     bld_elev            = 0,
                      n_tiers             = 1,
                      bld_xcoords         = as.numeric(NA),
                      bld_ycoords         = as.numeric(NA),
@@ -37,12 +37,12 @@ new_bpip <- function(prj_title           = "BPIP input",
 
 df <- tibble::tibble(prj_title         = prj_title,
                      bld_id            = bld_id,
-                     height            = height,
+                     bld_height        = bld_height,
                      width_x           = width_x,
                      length_y          = length_y,
                      bld_rotation      = bld_rotation,
                      angle_units       = angle_units,
-                     elev              = elev,
+                     bld_elev          = bld_elev,
                      n_tiers           = n_tiers,
                      bld_xcoords       = list(bld_xcoords),
                      bld_ycoords       = list(bld_ycoords),

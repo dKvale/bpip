@@ -4,9 +4,9 @@
 \alias{new_bpip}
 \title{A BPIP data frame of building parameters}
 \usage{
-new_bpip(prj_title = "BPIP input", bld_id = "Bld_1", height = 10,
+new_bpip(prj_title = "BPIP input", bld_id = "Bld_1", bld_height = 10,
   width_x = 5, length_y = 10, bld_rotation = 0, angle_units = "degrees",
-  elev = 0, n_tiers = 1, bld_xcoords = as.numeric(NA),
+  bld_elev = 0, n_tiers = 1, bld_xcoords = as.numeric(NA),
   bld_ycoords = as.numeric(NA), dist_from_source = 20,
   angle_from_source = 0, source_name = "Stack_1", source_xy = c(0, 0),
   source_elev = 0, source_height = 10)
@@ -14,7 +14,7 @@ new_bpip(prj_title = "BPIP input", bld_id = "Bld_1", height = 10,
 \arguments{
 \item{bld_id}{Building ID or name.}
 
-\item{height}{Height of building in meters.}
+\item{bld_height}{Height of building in meters.}
 
 \item{width_x}{Width of building from East to West in meters.}
 

@@ -57,7 +57,7 @@ builds$angle_from_source[2] <- 90
 
 builds$bld_rotation[2]      <- 60
 
-builds$height[2]            <- 15
+builds$bld_height[2]            <- 15
 
 kable(builds)
 ```
