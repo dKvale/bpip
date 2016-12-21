@@ -2,24 +2,37 @@
 % Please edit documentation in R/new_bpip.R
 \name{new_bpip}
 \alias{new_bpip}
-\title{Build a BPIP data frame of building parameters}
+\title{A BPIP data frame of building parameters}
 \usage{
-new_bpip(prj_title = "BPIP input", building = "Bld_1", height = 10,
+new_bpip(prj_title = "BPIP input", bld_id = "Bld_1", height = 10,
   width_x = 5, length_y = 10, bld_rotation = 0, angle_units = "degrees",
-  elev = 0, n_tiers = 1, bld_xcoords = c(), bld_ycoords = c(),
-  dist_from_source = 20, angle_from_source = 0, source_name = "Stack_1",
-  source_xy = c(0, 0), source_elev = 0, source_height = 10)
+  elev = 0, n_tiers = 1, bld_xcoords = as.numeric(NA),
+  bld_ycoords = as.numeric(NA), dist_from_source = 20,
+  angle_from_source = 0, source_name = "Stack_1", source_xy = c(0, 0),
+  source_elev = 0, source_height = 10)
 }
 \arguments{
-\item{building}{Building IDs or names.}
+\item{bld_id}{Building ID or name.}
 
-\item{dist_from_source}{Distance from center of source to center of building.}
+\item{height}{Height of building in meters.}
+
+\item{width_x}{Width of building from East to West in meters.}
+
+\item{length_y}{Length of building from North to South in meters.}
+
+\item{bld_rotation}{Building rotation from North in degrees.}
+
+\item{dist_from_source}{Distance from center of source to center of building in meters.}
+
+\item{angle_from_source}{Angle between center of building and center of source in degrees. 
+Straight North is "0".
+Straight East is "90".}
 }
 \description{
 Create an input table of building parameters for BPIP.
 }
 \examples{
-new_bpip(building = "Boiler house")
+new_bpip(bld_id = "Boiler house")
 }
 \keyword{bpip}
 \keyword{building}
