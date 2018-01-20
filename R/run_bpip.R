@@ -26,8 +26,8 @@ run_bpip <- function(input      = "bpip.inp",
     stop()
   }
   
-  # Copy input file to .exe folder
-  writeLines(readLines(input), paste0(exe_folder, "/bpip.inp"))
+  # Copy input file to .exe folder if not there already
+  if (!"bpip.inp" %in% tolower(list.files(exe_folder))) writeLines(readLines(input), paste0(exe_folder, "/bpip.inp"))
   
   # Shell command
   relocate <- paste0("CD /d ", getwd(), " & CD /d ", exe_folder)

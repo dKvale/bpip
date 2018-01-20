@@ -39,7 +39,7 @@ write_bpip <- function(data,
   
   for(i in 1:nrow(data)) {                  # Building names and tier coordinates
     
-    inp[length(inp) +1] <- paste0(" '",  substring(data[i, "bld_id"], 1, 8), "' ", data[i, "n_tiers"], " ",data[i, "bld_elev"])
+    inp[length(inp) + 1] <- paste0("'",  substring(data[i, "bld_id"], 1, 8), "' ", data[i, "n_tiers"], " ",data[i, "bld_elev"])
     
     if(is.null(data[i, "bld_xcoords"]) | 
        is.null(data[i, "bld_ycoords"]) | 
@@ -76,14 +76,15 @@ write_bpip <- function(data,
     
   }
   
-  inp[length(inp) +1] <- 1       # Number of stacks
+  inp[length(inp) + 1] <- 1       # Number of stacks
   
-  inp[length(inp) +1] <- paste0("  '", substring(data[1, "source_name"], 1, 8), "' ", 
+  inp[length(inp) + 1] <- paste0("'", substring(data[1, "source_name"], 1, 8), "' ", 
                                 data[1, "source_elev"], " ", 
                                 data[1, "source_height"], " ",
                                 paste(unlist(data[1, ]$source_xy), collapse=" "))
   
   cat("\nGenerated input file: \n\n")
+  
   invisible(writeLines(inp))
   
   if(is.null(path) || nchar(path) < 1) {
@@ -94,7 +95,7 @@ write_bpip <- function(data,
     
     con <- file(path)
     
-    writeLines(inp_text, con)
+    writeLines(inp, con)
     
     close(con)
   }

@@ -22,4 +22,3 @@ rotate_bld(center_x = 0, center_y = 0, width_x = 2, length_y = 1)
 \keyword{building}
 \keyword{coords}
 \keyword{rectangle}
-

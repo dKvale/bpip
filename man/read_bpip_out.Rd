@@ -62,4 +62,3 @@ read_bpip_out(file = bpip_out)
 \keyword{output}
 \keyword{read}
 \keyword{results}
-

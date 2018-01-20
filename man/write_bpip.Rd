@@ -33,4 +33,3 @@ write_bpip(data = buildings, path = "bpip.inp")
 \keyword{input}
 \keyword{save}
 \keyword{write}
-

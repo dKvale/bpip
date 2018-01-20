@@ -21,4 +21,3 @@ bld_coords(source_xy = c(0, 0))
 \keyword{building}
 \keyword{coords}
 \keyword{input}
-

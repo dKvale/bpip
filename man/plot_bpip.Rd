@@ -21,4 +21,3 @@ plot_bpip(data = buildings)
 \keyword{buildings}
 \keyword{downwash}
 \keyword{plot}
-

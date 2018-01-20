@@ -108,7 +108,7 @@ read_bpip_inp <- function(file) {
     
     if(length(line) > 1) {
     
-      sources     <-  c(sources, line[[2]])
+      sources     <-  c(sources, gsub("'", "", line[[2]]))
       src_elevs   <-  c(src_elevs, line[[3]])
       src_heights <-  c(src_heights, line[[4]])
       src_coords[length(src_coords) + 1]  <-  list(as.numeric(c(line[[5]], line[[6]])))
