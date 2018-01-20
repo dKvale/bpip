@@ -49,6 +49,7 @@ read_bpip_inp <- function(file) {
   sources_start <- max((1:(length(inp)-1))[!grepl("[']", inp) & !grepl('["]', inp)], na.rm=T)
   
   
+  # Collect building names and coordinates
   for(i in 6:(sources_start - 1)) {
     
     if(!skip) {
@@ -58,8 +59,9 @@ read_bpip_inp <- function(file) {
       # Check if line contains building name
       if(grepl("[']", line[2]) | grepl('["]', line[2])) {
           
+          # Record last buildings info
           if(length(x_coords) > 1) {
-            widths <- c(widths, signif(max(x_coords) - min(x_coords), 2))
+            widths   <- c(widths, signif(max(x_coords) - min(x_coords), 2))
             lengths  <- c(lengths, signif(max(y_coords) - min(y_coords), 2))
             bld_xcoords[length(bld_xcoords)+1] <- list(x_coords)
             bld_ycoords[length(bld_ycoords)+1] <- list(y_coords)
@@ -67,6 +69,7 @@ read_bpip_inp <- function(file) {
             y_coords <- c()
           }
             
+          # Gather new buildings info
           buildings <- c(buildings, line[2])
           n_tiers   <- c(n_tiers, line[3])
           elevs     <- c(elevs, line[4])
@@ -74,16 +77,18 @@ read_bpip_inp <- function(file) {
           heights <- c(heights, strsplit(paste0(" ", inp[i+1]), "\\s+")[[1]][3]) 
       
           skip <- TRUE
+          
       } else {
          x_coords <- c(x_coords, as.numeric(line[2]))
-         y_coords <- c(y_coords, as.numeric(strsplit(paste0(" ", inp[i]), "\\s+")[[1]][3]) )
+         y_coords <- c(y_coords, as.numeric(strsplit(paste0(" ", inp[i]), "\\s+")[[1]][3]))
       }
     
     } else skip <- FALSE
   }
   
+  # Record the very last buildings info
   if(length(x_coords) > 1) {
-    widths <- c(widths, signif(max(x_coords) - min(x_coords), 2))
+    widths   <- c(widths, signif(max(x_coords) - min(x_coords), 2))
     lengths  <- c(lengths, signif(max(y_coords) - min(y_coords), 2))
     bld_xcoords[length(bld_xcoords)+1] <- list(x_coords)
     bld_ycoords[length(bld_ycoords)+1] <- list(y_coords)
@@ -91,6 +96,7 @@ read_bpip_inp <- function(file) {
     y_coords <- c()
   }
   
+  # Collect source info
   sources      <- c()
   src_elevs    <- c()
   src_heights  <- c()
@@ -106,7 +112,8 @@ read_bpip_inp <- function(file) {
       src_elevs   <-  c(src_elevs, line[[3]])
       src_heights <-  c(src_heights, line[[4]])
       src_coords[length(src_coords) + 1]  <-  list(as.numeric(c(line[[5]], line[[6]])))
-    } 
+    
+      } 
   } 
   
   distances  <- c()
@@ -116,10 +123,11 @@ read_bpip_inp <- function(file) {
     
     bld_center <- c(mean(bld_xcoords[[i]]), mean(bld_ycoords[[i]]))
     
-    distances <- c(distances, stats::dist(cbind(src_coords[[1]], bld_center))[[1]])
+    distances <- c(distances, round(stats::dist(rbind(src_coords[[1]], bld_center))[[1]], 5))
     
     # Normalize coordinates
     a <- c(0, 1)
+    
     b <- c(bld_center[1] - as.numeric(src_coords[[1]][1]), bld_center[2] - as.numeric(src_coords[[1]][2]))
     
     # Calculate angle between building and North
@@ -142,14 +150,14 @@ read_bpip_inp <- function(file) {
                          angle_units       = "degrees",
                          bld_elev          = elevs,
                          n_tiers           = n_tiers,
-                         bld_xcoords       = list(bld_xcoords),
-                         bld_ycoords       = list(bld_ycoords),
+                         bld_xcoords       = bld_xcoords,
+                         bld_ycoords       = bld_ycoords,
                          dist_from_source  = distances,
                          angle_from_source = angles,
-                         source_name       = list(sources),
-                         source_xy         = list(src_coords),
-                         source_elev       = list(src_elevs),
-                         source_height     = list(src_heights))
+                         source_name       = sources,
+                         source_xy         = src_coords,
+                         source_elev       = src_elevs,
+                         source_height     = src_heights)
 
   return(inp)
   

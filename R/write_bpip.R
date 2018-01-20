@@ -87,8 +87,17 @@ write_bpip <- function(data,
   invisible(writeLines(inp))
   
   if(is.null(path) || nchar(path) < 1) {
+    
     return(inp)
-  } else  writeLines(inp, path)
+    
+  } else  {
+    
+    con <- file(path)
+    
+    writeLines(inp_text, con)
+    
+    close(con)
+  }
     
 }
 

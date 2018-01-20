@@ -15,7 +15,6 @@
 #' @examples
 #' new_bpip(bld_id = "Boiler house")
 # 
-# 
 new_bpip <- function(prj_title           = "BPIP input",
                      bld_id              = "Bld_1",
                      bld_height          = 10,
