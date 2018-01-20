@@ -70,7 +70,7 @@ read_bpip_inp <- function(file) {
           }
             
           # Gather new buildings info
-          buildings <- c(buildings, line[2])
+          buildings <- c(buildings, gsub("'", "", line[2]))
           n_tiers   <- c(n_tiers, line[3])
           elevs     <- c(elevs, line[4])
           
@@ -142,7 +142,7 @@ read_bpip_inp <- function(file) {
   
   # Create data frame
   inp  <- tibble::tibble(prj_title         = inp[1],
-                         building          = buildings,
+                         bld_id            = buildings,
                          bld_height        = heights,
                          width_x           = widths,
                          length_y          = lengths,
