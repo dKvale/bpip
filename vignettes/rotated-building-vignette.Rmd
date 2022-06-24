@@ -12,9 +12,9 @@ vignette: >
   
 ## Running BPIP for a rotated building
   
-This example creates downwash inputs for a 10x10x10 building that is rotated 45 degrees. The structure location is set to 20 meters West of an air emissions source.
+This example creates downwash inputs for a 10x10x10 building that is rotated 45 degrees and located 20 meters West of the air emissions source.
 
-## Install BPIP to the working directory
+## Install BPIP to a new EPA folder in working directory
 ```{r eval = T}
 library(installEPA)
 
