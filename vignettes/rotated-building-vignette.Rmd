@@ -3,21 +3,22 @@ title: "bpip: Rotated building"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
-    toc: true
-    keep_md: true
+  toc: true
+keep_md: true
 vignette: >
   %\VignetteIndexEntry{bpip: Rotated building}
   %\VignetteEngine{knitr::rmarkdown}
 ---
-
+  
 ## Running BPIP for a rotated building
-
-This example creates downwash inputs for a 10x10x10 building that is rotated 45 degrees. The structure will be positioned 20 meters to the West of an air emissions source.
+  
+This example creates downwash inputs for a 10x10x10 building that is rotated 45 degrees. The structure location is set to 20 meters West of an air emissions source.
 
 ## Install BPIP to the working directory
 ```{r eval = T}
 library(installEPA)
-#install_epa("bpip", "EPA")
+
+install_epa("bpip", dir = "EPA")
 ```
 
 ## Create new bpip table
@@ -56,11 +57,10 @@ builds$angle_from_source[2] <- 90
 
 builds$bld_rotation[2]      <- 60
 
-builds$bld_height[2]            <- 15
+builds$bld_height[2]        <- 15
 
 kable(builds)
 ```
-
 
 ## Plot buildings
 ```{r }
@@ -69,19 +69,17 @@ plot_bpip(builds)
 
 ## Create bpip input file
 ```{r }
-#write_bpip(builds, "rotated_building.inp")
+write_bpip(builds, "rotated_building.bpi")
 ```
 
 ## Run bpip
 ```{r }
-#run_bpip("rotated_building.inp", "rotated_results", exe_folder = "EPA/bpip")
+run_bpip("rotated_building.bpi", "rotated_results", exe_folder = "EPA/")
 ```
 
 ## Read results
 ```{r }
-#results <- read_bpip_out(file = "rotated_results.out", as_text = FALSE)
+results <- read_bpip_out(file = "rotated_results.out", as_text = FALSE)
 
-#kable(results)
+kable(results)
 ```
-
-
