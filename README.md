@@ -42,3 +42,26 @@ builds
 ```r 
 plot_bpip(builds)
 ```
+
+## Install BPIP to a new EPA folder in working directory
+```r 
+library(installEPA)
+install_epa("bpip", dir = "EPA")
+```
+
+## Create bpip input file
+```r 
+write_bpip(builds, "rotated_building.bpi")
+```
+
+## Run bpip
+```r 
+run_bpip("rotated_building.bpi", "rotated_results", exe_folder = "EPA/")
+```
+
+## Read results
+```r 
+results <- read_bpip_out(file = "rotated_results.out", as_text = FALSE)
+
+results
+```
