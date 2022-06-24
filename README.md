@@ -43,7 +43,7 @@ builds
 plot_bpip(builds)
 ```
 
-## Install BPIP to a new EPA folder in working directory
+## Install BPIP to EPA folder in working directory
 ```r 
 library(installEPA)
 install_epa("bpip", dir = "EPA")
