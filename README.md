@@ -21,22 +21,24 @@ remotes::install_github("dKvale/bpip")
 Create a 10x10x10 building that is rotated 45 degrees and located 20 meters West of the air emissions source.
 
 ## Create new bpip table
-```{r }
+```r 
 library(bpip)
+
 builds <- new_bpip()
-library(knitr)
-kable(builds)
+
+builds
 ```
 
 ## Adjust building parameters
-```{r }
+```r 
 builds$bld_rotation      <- 45
 builds$length_x          <- 10
 builds$angle_from_source <- 270 
-kable(builds)
+
+builds
 ```
 
 ## Plot building
-```{r }
+```r 
 plot_bpip(builds)
 ```
